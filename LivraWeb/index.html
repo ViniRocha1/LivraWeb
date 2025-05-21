@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../livraWeb/styles/style.css">
+</head>
+
+<body>
+    <div class="header index">
+        <div class="navbar">
+            
+           <a href="index.html"><img src="../livraWeb/assets/icon/iconLivro.png" alt="Logo Lagotto" class="icon"></a>
+            <div class="navbarLinks">
+                <a href="sobreNos.html">
+                    <p>Sobre</p>
+                </a>
+                <a href="#">Livros</a>
+                <a href="#">Contato</a>
+                <a href="login.html"><button >Entrar</button></a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="headerMain">
+                <h1>Manhwas<br></h1>
+                <p>Os Manhwas são quadrinhos sul coreanos muito famosos no extremo Leste da Ásia por suas historias fantasiosas </p>
+            </div>
+        </div>
+        <div class="setaConteudo">
+            <a href="#introducao"><img src="assets/icon/ChevronDown.svg" alt=""></a>
+        </div>
+    </div>
+    <div class="spacing"></div>
+    <div class="container">
+        <div class="introducao" id="introducao">
+            <h1>O que são os manhwas?</h1>
+            <div class="conteudo">
+                <div class="texto">
+                    <p>Os manhwa são histórias em quadrinhos originárias da Coreia do Sul, conhecidas por sua arte detalhada e estilo único. Eles são lidos da esquerda para a direita, ao contrário dos mangás, que são tradicionalmente lidos da direita para a esquerda. 
+                        Os manhwa podem ser coloridos ou em preto e branco e são frequentemente digitais, conhecidos como <span>webtoons</span>. Além disso, os manhwa têm uma rica história que remonta a períodos de propaganda durante a ocupação japonesa e um crescimento
+                         significativo após a independência da Coreia.</p>   
+                </div>
+                <img src="assets/img/soloLeveling.jpg" alt="Sensor Umidade Solo" class="imgSoloLevellingIndex">
+            </div>
+
+
+   <section class="section-books" id="livros">
+
+    <h2>Ler Agora</h2>
+    <br>
+
+    <div class="carousel-container">
+
+      <button class="arrow arrow-left" onclick="scrollCarousel(-1)">‹</button>
+      <div class="carousel" id="carousel">
+
+        <div class="book-card">
+          <img src="assets/img/soloLevelingCarrossel.jpg" alt="Livro 1">
+          <h3>Solo Leveling</h3>
+          <button>Ler Livro</button>
+        </div>
+        <div class="book-card">
+          <img src="assets/img/TBAT.jpg" alt="Livro 2">
+          <h3>The Beggining After The End</h3>
+          <button>Ler Livro</button>
+        </div>
+        <div class="book-card">
+          <img src="assets/img/secondLifeRanker.jpg" alt="Livro 3">
+          <h3>Second Life Ranker</h3>
+          <button>Ler Livro</button>
+        </div>
+        <div class="book-card">
+          <img src="assets/img/Heavenly.webp" alt="Livro 4">
+          <h3>Heavenly Inquisition Sword</h3>
+          <button>Ler Livro</button>
+        </div>
+        <div class="book-card">
+          <img src="assets/img/revengeIronBloodedSwordHound.webp" alt="Livro 5">
+          <h3>Revenge Iron-Blooded Sword Hound</h3>
+          <button>Ler Livro</button>
+        </div>
+      </div>
+      <button class="arrow arrow-right" onclick="scrollCarousel(1)">›</button>
+    </div>
+  </section>
+        </div>
+    </div>
+
+    <div class="spacing"></div>
+    <div class="container container-cards">
+        <h1>Por que este tema?</h1>
+        <div class="cards">
+            <div class="card">
+                <img src="assets/img/hxh.jpg" alt="Arduino Uno" class="imgCard">
+                <div class="texto">
+                    <h4>Animes</h4>
+                    <p>Bom, eu sempre gostei muito de <span>animes</span>, isso desde pequeno. Quando entrei na adolescencia conheci os mangás, coisa essa que me encantou muito,
+                         desde entao comecei a ler todos os tipos e generos de <span>mangás</span>, <span>manhwas</span>, <span>Webtoons</span>, etc.</p>
+                </div>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+   
+    <div class="footer">
+        <div class="container">
+            <div class="LivraWebInc">
+                <img src="assets/icon/iconLivro.png" alt="logo LivraWeb" class="imgFooter">
+                
+                <h4>© 2025 LivraWeb, Inc. - Todos os direitos reservados.</h4>
+            </div>
+            <div class="lista">
+                <ol>
+                    <li><span>Recursos</span></li>
+                    <li>Livros</li>
+                    <li>Leituras</li>
+                    <li>Quizes</li>
+                </ol>
+            </div>
+            <div class="lista">
+                <ol>
+                    <li><span>Sobre a LivraWeb</span></li>
+                    <li>Equipe</li>
+                    <li>História</li>
+
+                </ol>
+            </div>
+            <div class="lista">
+                <ol>
+                    <li><span>Legalidade</span></li>
+                    <li>Conformidade Regulatória</li>
+                    <li>Cookies</li>
+                    <li>Privacidade</li>
+                    <li>Termos de Serviço</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+     <script>
+    const carousel = document.getElementById('carousel');
+    const cards = Array.from(carousel.children);
+    const cardWidth = cards[0].offsetWidth + 16; // largura + gap
+
+    // Clonagem de livros
+    const cloneFirst = cards.slice(0, 3).map(card => card.cloneNode(true));
+    const cloneLast = cards.slice(-3).map(card => card.cloneNode(true));
+
+    cloneFirst.forEach(card => carousel.appendChild(card));
+    cloneLast.reverse().forEach(card => carousel.insertBefore(card, carousel.firstChild));
+
+    // Ajusta a posição inicial
+    carousel.scrollLeft = cardWidth * 3;
+
+    // Função de rolagem
+    function scrollCarousel(direction) {
+      carousel.scrollBy({
+        left: direction * cardWidth,
+        behavior: 'smooth'
+      });
+    }
+
+    // Detecta o final e reposiciona o scroll
+    carousel.addEventListener('scroll', () => {
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+      if (carousel.scrollLeft <= 0) {
+        carousel.scrollLeft = maxScroll - (cardWidth * 6); // Pular para o final dos clones
+      } else if (carousel.scrollLeft >= maxScroll - cardWidth * 3) {
+        carousel.scrollLeft = cardWidth * 3; // Volta para o início dos clones
+      }
+    });
+  </script>
+
+</body>
+
+</html>
+

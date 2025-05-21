@@ -1,0 +1,362 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'DM Sans', sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 85%;
+    margin: auto;
+}
+
+.spacing {
+    height: 100px;
+}
+
+/* HEADER */
+
+.header {
+    background-color: rgba(0, 0, 0, 0.500);
+    height: 60px;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.sobreNos {
+    background-image: url(../assets/img/bannerSobreNos.png);
+}
+
+.index {
+    background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.726), rgba(255, 255, 255, 0)),
+    linear-gradient(to top, #f8f8ee 0%, rgba(0, 0, 0, 0) 20%),
+    url(../assets/img/kindle.jpg);
+}
+
+
+
+.index .container .headerMain {
+    justify-self: flex-start;
+    text-align: left;
+    width: 40%;
+}
+
+.navbar {
+
+    background-color: rgba(160, 160, 160, 0.5);
+    height: 60px;
+    display: flex;
+    color: black;
+    padding: 30px 0px 30px 40px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon {
+    width: 120px;
+    height: 80px;
+}
+
+
+.navbar a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbarLinks {
+    display: flex;
+    justify-content: space-evenly;
+    width: 45%;
+}
+
+.navbarLinks button {
+    background: transparent;
+    border: 1px solid black;
+    padding: 4px 15px 4px 15px;
+    color: inherit;
+    border-radius: 4px;
+}
+
+.headerMain {
+    color: #FFFFFF;
+    width: 46%;
+    justify-self: flex-start;
+}
+
+.headerMain h1 {
+    font-size: 80px;
+}
+
+.headerMain p {
+    font-size: 20px;
+}
+
+.setaConteudo {
+    align-self: center;
+}
+
+.setaConteudo img {
+    width: 60px;
+}
+
+/* INTRODUCAO */
+
+.introducao {
+    display: flex;
+    flex-direction: column;
+}
+
+.introducao span {
+    color: #af07da;
+    font-weight: bold;
+}
+
+.imgSoloLevellingIndex {
+    border: 2px solid #af07da;
+    border-radius: 10%;
+}
+
+/* CARROSSEL */
+
+/* Seção Livros */
+
+
+.section-books {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.carousel-container {
+  position: relative;
+  max-width: 960px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 1rem;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.book-card {
+  flex: 0 0 30%;
+  min-width: 30%;
+  background-color: #f8f4f2;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+.book-card:hover {
+  transform: scale(1.05);
+}
+
+.book-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.book-card h3 {
+  margin: 1rem 0 0.5rem;
+}
+
+.book-card button {
+  background-color: #af07da;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.book-card button:hover {
+  background-color: #d508f0;
+}
+
+/* Setas do carrossel */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #af07da;
+  border: none;
+  font-size: 2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 100%;
+  z-index: 2;
+  
+}
+
+.arrow:hover {
+  background-color: #b26cbb;
+}
+
+.arrow-left {
+  left: 10px;
+}
+
+.arrow-right {
+  right: 10px;
+}
+
+.introducao .conteudo {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.introducao .conteudo .texto {
+    width: 51%;
+}
+
+.introducao h1 {
+    font-size: 50px;
+}
+
+.introducao p {
+    font-size: 21px;
+}
+
+.introducao img {
+    width: 480px;
+}
+
+/* CARDS */
+
+.container-cards h1{
+    font-size: 50px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+
+.cards .card {
+    width: 800px;
+    height: 100%;
+    border-radius: 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cards .card .imgCard{
+    width: 100%;
+}
+
+.cards .card h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.cards .card .texto{
+    padding: 20px;
+    text-align: center;
+}
+
+.cards .card .texto h4 span{
+    color: #149D80;
+}
+
+.cards .card .texto span{
+    color: #af07da;
+    font-weight: bold;
+}
+
+.saibaMais {
+    background-color: #af07da;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    gap: 10px;
+    width: 150px;
+    margin-bottom: 10px;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    align-items: center;
+}
+
+.cards .card .saibaMais {
+    justify-self: flex-end;
+}
+
+.saibaMais img{
+    height: 15px;
+    width: 15px;
+}   
+
+/* FOOTER */
+
+.footer {
+    background-color: rgb(112, 112, 112);
+    color: #FFFFFF;
+}
+
+.footer img {
+    width: 200px;
+    height: 200px;
+}
+
+.footer .container {
+    height: 350px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer .container h4{
+    font-weight: 500;
+}
+
+.footer .container .lista{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer .container span{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.footer .container .lista li{
+    padding: 4px;
+    font-weight: 200;
+}
+
+.lista li span {
+    color: #af07da;
+}
