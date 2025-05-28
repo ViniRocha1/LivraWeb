@@ -1,2 +1,2 @@
-# WebLivrariaTBAT
-Livraria online (The Beginning After the End)
+# LivraWeb
+Uma livraria online que conta um pouco sobre meu gosto literário
