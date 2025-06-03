@@ -1,86 +1,138 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
-
-/*
-comandos para mysql server
-*/
-
--- criar banco de dados livraweb
-create database livraweb;
-drop database livraweb;
-
--- selecionar o banco de dados
+create database if not exists livraweb;
 use livraweb;
 
--- criar tabela de usuarios
-create table usuario (
-
-    id int auto_increment,
-    nome varchar(100),
-    email varchar(100),
-    senha varchar(100),
-    primary key (id)
+-- Tabela de usuário
+create table if not exists usuario (
+    id int primary key not null auto_increment,
+    nome varchar(100) not null,
+    email varchar(255) not null,
+    senha varchar(255) not null,
+    data_cadastro datetime default current_timestamp
 );
 
--- criar tabela de manhwas
-create table manhwa (
-    id int auto_increment,
-    titulo varchar(150),
+-- Tabela de manhwas
+create table if not exists manhwa (
+    id int primary key not null auto_increment,
+    titulo varchar(150) not null,
     autor varchar(100),
     genero varchar(100),
     sinopse text,
-    data_publicacao date,
-    primary key (id)
+    data_publicacao date
 );
 
 
-
-insert into manhwa (titulo, autor, genero, sinopse, data_publicacao) values ('The Beggening After The End', 'Brandon Lee', 'Ação', 'O rei Grey, apesar de um reinado próspero, 
-sente um vazio interior e, após morrer, reencarna como Arthur Leywin, um bebê em um mundo mágico. 
-Arthur, com a consciência da sua vida anterior, busca dominar a magia e se tornar um poderoso guerreiro.', '2018-07-07' );
-
-
--- criar tabela de quiz
-create table quiz (
-    id int auto_increment,
-    titulo varchar(150),
-    id_manhwa int,
-    foreign key (id_manhwa) references manhwa(id),
-    primary key (id)
+-- Tabela de quiz
+create table if not exists quiz (
+    id int primary key not null auto_increment,
+    titulo varchar(150) not null,
+    id_manhwa int not null,
+    total_perguntas int not null,
+    foreign key (id_manhwa) references manhwa(id)
 );
 
-insert into quiz (titulo, id_manhwa) values('Quiz TBATE', 1 );
-
--- criar tabela de pergunta
-create table pergunta (
-    id int auto_increment,
-    enunciado text,
-    id_quiz int,
-    foreign key (id_quiz) references quiz(id),
-    primary key (id)
+-- Tabela de pergunta
+create table if not exists pergunta (
+    id int primary key not null auto_increment,
+    enunciado text not null,
+    id_quiz int not null,
+    foreign key (id_quiz) references quiz(id)
 );
 
--- criar tabela de alternativa
-create table alternativa (
-    id int auto_increment,
-    texto varchar(255),
-    correta boolean,
-    id_pergunta int,
-    foreign key (id_pergunta) references pergunta(id),
-    primary key (id)
+-- Tabela de alternativa
+create table if not exists alternativa (
+    id int primary key not null auto_increment,
+    texto varchar(255) not null,
+    correta boolean not null,
+    id_pergunta int not null,
+    foreign key (id_pergunta) references pergunta(id)
 );
 
--- criar tabela de resposta_usuario
-create table resposta_usuario (
-    id_usuario int,
-    id_pergunta int,
-    id_alternativa int,
-    data_resposta datetime,
+-- Tabela de resposta do usuário
+create table if not exists resposta_usuario (
+    id_usuario int not null,
+    id_pergunta int not null,
+    id_alternativa int not null,
+    data_resposta datetime default current_timestamp,
+    primary key (id_usuario, id_pergunta),
     foreign key (id_usuario) references usuario(id),
     foreign key (id_pergunta) references pergunta(id),
-    foreign key (id_alternativa) references alternativa(id),
-    primary key (id_usuario, id_pergunta)
+    foreign key (id_alternativa) references alternativa(id)
 );
 
+-- Nova tabela pontuacao para controlar tentativas e pontuações
+create table if not exists pontuacao (
+    id int primary key auto_increment,
+    tentativa int not null,
+    fkQuiz int not null,
+    fkUsuario int not null,
+    pontuacao int not null,
+    data_registro datetime default current_timestamp,
+    foreign key (fkQuiz) references quiz(id),
+    foreign key (fkUsuario) references usuario(id)
+);
 
+-- Inserts de manhwas principais
+insert into manhwa (titulo, autor, genero, sinopse, data_publicacao) values
+('TBATE', 'TurtleMe', 'Fantasia', 'The Beginning After The End conta a história de King Grey, que renasce em um novo mundo.', '2018-01-01'),
+('Solo Leveling', 'Chugong', 'Ação', 'Um caçador de rank baixo se torna incrivelmente poderoso.', '2016-07-01'),
+('Second Life Ranker', 'Sadoyeon', 'Aventura', 'Yeon-woo entra em uma torre para vingar seu irmão.', '2019-01-01'),
+('Heavenly Inquisition Sword', 'Hajun Im', 'Ação', 'Um jovem busca se vingar de traidores.', '2020-05-01'),
+('Revenge Iron-Blooded Sword Hound', 'Unknown', 'Fantasia', 'Uma história de vingança e honra em um mundo brutal.', '2021-03-01');
+
+-- Calcula a porcentagem de usuários que responderam quizzes de cada manhwa
+SELECT 
+    m.titulo AS manhwa,
+    ROUND((COUNT(DISTINCT r.id_usuario) * 100.0) / (SELECT COUNT(*) FROM usuario), 2) AS porcentagemUsuarios
+FROM resposta_usuario r
+INNER JOIN pergunta p ON r.id_pergunta = p.id
+INNER JOIN quiz q ON p.id_quiz = q.id
+INNER JOIN manhwa m ON q.id_manhwa = m.id
+GROUP BY m.titulo;
+
+-- 2️ Mostra para um usuário específico o total de respostas e data da última resposta por manhwa
+SELECT 
+    u.nome,
+    m.titulo AS manhwa,
+    COUNT(*) AS totalRespostas,
+    MAX(r.data_resposta) AS ultimaResposta
+FROM resposta_usuario r
+INNER JOIN usuario u ON r.id_usuario = u.id
+INNER JOIN pergunta p ON r.id_pergunta = p.id
+INNER JOIN quiz q ON p.id_quiz = q.id
+INNER JOIN manhwa m ON q.id_manhwa = m.id
+WHERE u.id = 1 -- Troque pelo ID do usuário logado
+GROUP BY u.nome, m.titulo;
+
+-- 3️ Lista todas as respostas de um usuário em um quiz específico, mostrando detalhes
+SELECT 
+    r.id_usuario,
+    u.nome,
+    q.titulo AS quiz,
+    m.titulo AS manhwa,
+    r.id_pergunta,
+    r.id_alternativa,
+    r.data_resposta
+FROM resposta_usuario r
+INNER JOIN usuario u ON r.id_usuario = u.id
+INNER JOIN pergunta p ON r.id_pergunta = p.id
+INNER JOIN quiz q ON p.id_quiz = q.id
+INNER JOIN manhwa m ON q.id_manhwa = m.id
+WHERE r.id_usuario = 1 AND q.id = 2 -- Troque pelo usuário e quiz atual
+ORDER BY r.data_resposta;
+
+-- 4️ Conta quantos quizzes diferentes cada usuário já respondeu
+SELECT 
+    u.nome,
+    COUNT(DISTINCT q.id) AS totalQuizzesRespondidos
+FROM resposta_usuario r
+INNER JOIN usuario u ON r.id_usuario = u.id
+INNER JOIN pergunta p ON r.id_pergunta = p.id
+INNER JOIN quiz q ON p.id_quiz = q.id
+GROUP BY u.nome
+ORDER BY totalQuizzesRespondidos DESC;
+
+-- 5️ Mostra todos os manhwas cadastrados no sistema
+SELECT * FROM manhwa;
+
+
+select* from usuario;
