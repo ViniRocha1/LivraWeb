@@ -60,9 +60,16 @@
       var nomeVar = nome_input.value;
       var emailVar = email_input.value;
       var senhaVar = senha_input.value;
+      var confirmarSenha = confirmacao_senha_input.value
   
       // Verificando se há algum campo em branco
-      if (
+      if(
+        confirmarSenha != senhaVar
+      ){
+        alert("As senhas não coincidem")
+        return
+      } else{
+        if (
         nomeVar == "" ||
         emailVar == "" ||
         senhaVar == "" 
@@ -100,6 +107,8 @@
         })
     }
     
+      }
+      
   </script>
 </body>
 
