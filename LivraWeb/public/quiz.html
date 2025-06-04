@@ -1,29 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./imagens/icon/marca icon.png" />
+    <link rel="stylesheet" href="./styles/dashboard.css" />
     <title>LivraWeb</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/quizLivraWeb.css">
-
+    <!-- Incluindo a biblioteca Chart.js para desenhar gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-
-<body>
-<header id="header">
-    <div class="container">
-        <div class="navbar">
-            <a href="index.html"><img src="assets/icon/iconLivro.png" alt="Logo LivraWeb" class="icon"></a>
-            <div class="navbarLinks">
-                <a href="index.html">Home</a>
-                <a href="#">Livros</a>
-                <a href="quiz.html">Quiz</a>
-            </div>
+<body onload="obterDados()">
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <ul>
+                    <li><a href="index.html"> Home </a></li>
+                    <li><a href="livros.html"> livros </a></li>
+                    <li><a href="votarManhwa.html"> Manhwas </a></li>
+                    <li><a href="quiz.html"> Quiz </a></li>
+                    <li>
+                        <img src="assets/icon/iconLivro.png" alt="Ícone Livro" />
+                    </li>
+                </ul>
+            </nav>
         </div>
-    </div>
-</header>
+    </header>
+
+    <div id="titulo" class="titulo"></div>
+    <div class="content">
     
     <div id="pontuacaoEJogo">
         <div class="botao_iniciar">
@@ -33,6 +39,7 @@
             <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
         </div>
     </div>
+</div>
 </body>
 
 </html>

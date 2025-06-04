@@ -7,7 +7,7 @@
   <title>Votação Manhwas</title>
   <link rel="icon" href="./imagens/icon/marca icon.png" />
   <link rel="stylesheet" href="./styles/votarManhwa.css" />
-  <script src="./js/sessionStorage.js"></script>
+
 </head>
 
 <body>
@@ -23,7 +23,6 @@
       </nav>
     </div>
   </header>
-
   <main class="votacao-content">
     <h1 class="titulo-principal">QUESTIONÁRIO <span>MANHWAS</span></h1>
 
@@ -34,11 +33,11 @@
       </div>
       <select id="manhwas" class="select-manhwa">
         <option value="#">SELECIONE</option>
-        <option value="solo">Solo Leveling</option>
-        <option value="tbat">The Beginning After The End (TBATE)</option>
-        <option value="second">Second Life Ranker</option>
-        <option value="heavenly">Heavenly Demon Reborn</option>
-        <option value="revenge">Revenge of the Iron-Blooded Sword Hound</option>
+        <option value="2">Solo Leveling</option>
+        <option value="1">The Beginning After The End (TBATE)</option>
+        <option value="3">Second Life Ranker</option>
+        <option value="4">Heavenly Demon Reborn</option>
+        <option value="5">Revenge of the Iron-Blooded Sword Hound</option>
       </select>
     </section>
 
@@ -50,6 +49,8 @@
   <script>
     const manhwaSelect = document.getElementById('manhwas');
     const manhwaImg = document.getElementById('imgManhwa');
+    const valorSelecionado = manhwaSelect.value
+
 
     const imagensManhwas = {
       solo: 'assets/img/soloLevelingCarrossel.jpg',
@@ -71,26 +72,33 @@
 
     function cadastrarVoto() {
       const selecionado = manhwaSelect.value;
-      if (selecionado === "#" || !selecionado) {
+      if (selecionado == "#" || !selecionado) {
         alert('Por favor, selecione um Manhwa.');
         return;
       }
+
+      console.log(selecionado)
 
       fetch(`/votacao/cadastrar`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id_usuario: sessionStorage.ID_USUARIO,
-          manhwa_favorito: selecionado
-        })
-      })
+          id_manhwa: selecionado
+        })                                                                                                                  
+      })                                                                               
       .then(res => {
-        if (!res.ok) throw new Error('Erro ao cadastrar voto: ' + res.status);
-        return res.json();
-      })
-      .then(() => {
+        if (!res.ok) {
+          res.text().then(texto=>{
+            console.error(texto)
+          })
+          return;
+        };
+
         alert('Voto cadastrado com sucesso!');
         window.location.href = "/dashboard.html";
+
+
       })
       .catch(erro => {
         console.error(erro);

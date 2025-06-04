@@ -2,8 +2,12 @@ var database = require("../database/config");
 
 function buscarManhwaFav() {
     var instrucaoSql = `
-    SELECT livro_favorito 
-    FROM questionario;`;  // Supondo que a coluna mudou de personagem_favorito para livro_favorito
+        select m.titulo,
+        COUNT(mf.id_manhwa) qtd
+        from manhwa_favorito mf
+        join manhwa m on mf.id_manhwa = m.id
+        group by m.titulo;
+    `; 
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
