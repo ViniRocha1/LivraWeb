@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Karantina&family=Poppins:wght@600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+    height: 100%;
+    background: linear-gradient(to right, #1e1e2f, #2d2d3f);
+    color: #ffffff;
+}
+
+/* Sidebar fixa lateral */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh; /* altura total da tela */
+  width: 220px; /* largura da sidebar */
+  background-color: rgba(94, 77, 178, 0.9);
+  box-shadow: 2px 0 8px rgba(94, 77, 178, 0.8);
+  z-index: 1000;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.navbar ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.navbar ul li {
+  width: 100%;
+  text-align: center;
+}
+
+.navbar ul li a {
+  display: block;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #d6ccff;
+  text-decoration: none;
+  padding: 10px 0;
+  width: 100%;
+  transition: color 0.3s ease;
+}
+
+
+
+.navbar ul li img {
+  height: 60px;
+  width: 60px;
+  margin: 20px auto 0;
+  display: block;
+}
+
+/* Ajustar conteúdo para não ficar atrás da sidebar */
+.titulo {
+  padding-top: 40px; /* só espaçamento para o topo da página */
+  padding-left: 260px; /* espaço da sidebar + margem */
+  color: #d6ccff;
+}
+
+.content {
+  margin-left: 260px; /* deslocar conteúdo para direita */
+  padding: 40px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Graficos e demais estilos permanecem iguais... */
+
+.titulo span {
+    display: block;
+    font-size: 3rem;
+    font-weight: 600;
+    color: #b497ff;
+    margin-bottom: 10px;
+}
+
+.titulo span2 {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #d6ccff;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    padding: 0 20px;
+}
+
+.graficos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.graficos canvas {
+    width: 450px !important;
+    height: 300px !important;
+    background-color: rgba(94, 77, 178, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(122, 93, 242, 0.3);
+}
+
+/* Scrollbar customizada (opcional) */
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background: #2d2d3f;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #7a5df2;
+    border-radius: 10px;
+    border: 2px solid #2d2d3f;
+}

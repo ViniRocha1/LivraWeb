@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Votação Manhwas</title>
+  <link rel="icon" href="./imagens/icon/marca icon.png" />
+  <link rel="stylesheet" href="./styles/votarManhwa.css" />
+  <script src="./js/sessionStorage.js"></script>
+</head>
+
+<body>
+  <header id="header">
+    <div class="container">
+      <nav class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="livros.html">Livros</a></li>
+          <li><a href="dashboard.html"> Dashboard </a></li>
+          <li><img src="assets/icon/iconLivro.png" alt="Ícone Livro" /></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="votacao-content">
+    <h1 class="titulo-principal">QUESTIONÁRIO <span>MANHWAS</span></h1>
+
+    <section class="votacao-secao">
+      <h2>Qual seu <span class="destaque">Manhwa</span> favorito?</h2>
+      <div class="imagem-preview">
+        <img id="imgManhwa" src="" alt="Imagem Manhwa" style="display:none;" />
+      </div>
+      <select id="manhwas" class="select-manhwa">
+        <option value="#">SELECIONE</option>
+        <option value="solo">Solo Leveling</option>
+        <option value="tbat">The Beginning After The End (TBATE)</option>
+        <option value="second">Second Life Ranker</option>
+        <option value="heavenly">Heavenly Demon Reborn</option>
+        <option value="revenge">Revenge of the Iron-Blooded Sword Hound</option>
+      </select>
+    </section>
+
+    <div class="botao-container">
+      <button onclick="cadastrarVoto()">CADASTRAR</button>
+    </div>
+  </main>
+
+  <script>
+    const manhwaSelect = document.getElementById('manhwas');
+    const manhwaImg = document.getElementById('imgManhwa');
+
+    const imagensManhwas = {
+      solo: 'assets/img/soloLevelingCarrossel.jpg',
+      tbat: 'assets/img/TBAT.jpg',
+      second: 'assets/img/secondLifeRanker.jpg',
+      heavenly: 'assets/img/Heavenly.webp',
+      revenge: 'assets/img/revengeIronBloodedSwordHound.webp'
+    };
+
+    manhwaSelect.addEventListener('change', () => {
+      const selecionado = manhwaSelect.value;
+      if (selecionado && imagensManhwas[selecionado]) {
+        manhwaImg.src = imagensManhwas[selecionado];
+        manhwaImg.style.display = 'block';
+      } else {
+        manhwaImg.style.display = 'none';
+      }
+    });
+
+    function cadastrarVoto() {
+      const selecionado = manhwaSelect.value;
+      if (selecionado === "#" || !selecionado) {
+        alert('Por favor, selecione um Manhwa.');
+        return;
+      }
+
+      fetch(`/votacao/cadastrar`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id_usuario: sessionStorage.ID_USUARIO,
+          manhwa_favorito: selecionado
+        })
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Erro ao cadastrar voto: ' + res.status);
+        return res.json();
+      })
+      .then(() => {
+        alert('Voto cadastrado com sucesso!');
+        window.location.href = "/dashboard.html";
+      })
+      .catch(erro => {
+        console.error(erro);
+        alert('Erro ao cadastrar voto.');
+      });
+    }
+  </script>
+</body>
+
+</html>

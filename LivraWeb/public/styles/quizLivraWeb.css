@@ -1,0 +1,179 @@
+/* quizLivraWeb.css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#spanQuestaoExibida, 
+#labelOpcaoUm, 
+#labelOpcaoDois, 
+#labelOpcaoTres, 
+#labelOpcaoQuatro {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; /* Negrito médio para destaque */
+    font-size: 1.1rem;
+    color: #4B367C; /* tom roxo escuro */
+}
+
+body {
+    background: linear-gradient(to right, #1e1e2f, #2d2d3f);
+    color: #ffffff;
+    min-height: 100vh;
+}
+header {
+    background-color: rgba(160, 160, 160, 0.5);
+    padding: 0;
+    box-shadow: none;
+}
+
+.navbar {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+.icon {
+    width: 120px;
+    height: 80px;
+}
+
+.navbarLinks {
+    display: flex;
+    gap: 40px;
+}
+
+.navbarLinks a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    transition: color 0.3s;
+    font-size: 1rem;
+}
+
+
+#pontuacaoEJogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 80px;
+}
+
+.botao_iniciar {
+    background-color: #2e2e44;
+    padding: 40px 60px;
+    border-radius: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.titulo-principal h1 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #d6ccff;
+}
+
+.titulo-principal span {
+    color: #b497ff;
+}
+
+button#btnIniciarQuiz {
+    background-color: #7a5df2;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button#btnIniciarQuiz:hover {
+    background-color: #9c80ff;
+    transform: scale(1.05);
+}
+
+.grid-opcoes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Estilo geral dos botões do quiz */
+#btnEnviar, #btnTentarNovamente {
+    background-color: #7a5df2; /* Roxo principal */
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    margin: 10px 0;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(122, 93, 242, 0.4);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    user-select: none;
+}
+
+#btnEnviar:hover:not(:disabled),
+#btnTentarNovamente:hover:not(:disabled) {
+    background-color: #9c80ff; /* Roxo mais claro no hover */
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(156, 128, 255, 0.6);
+}
+
+#btnEnviar:disabled,
+#btnTentarNovamente:disabled {
+    background-color: #55597e; /* Cinza escuro para desabilitado */
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    color: #c2c2d6;
+}
+
+#btnTentarNovamente {
+    background-color: #5e4db2; 
+    box-shadow: 0 4px 8px rgba(94, 77, 178, 0.5);
+}
+
+#btnTentarNovamente:hover:not(:disabled) {
+    background-color: #836ccc;
+    box-shadow: 0 6px 12px rgba(131, 108, 204, 0.7);
+}
+
+
+.acertos {
+    color: green;
+}
+
+.erros {
+    color: red;
+}
+
+.text-success-final {
+    color: #2ecc71; /* verde */
+    font-weight: bold;
+}
+
+.text-warning-final {
+    color: #f39c12; /* amarelo */
+    font-weight: bold;
+}
+
+.text-danger-final {
+    color: #e74c3c; /* vermelho */
+    font-weight: bold;
+}

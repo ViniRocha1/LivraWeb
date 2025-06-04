@@ -71,6 +71,16 @@ create table if not exists pontuacao (
     foreign key (fkUsuario) references usuario(id)
 );
 
+CREATE TABLE IF NOT EXISTS manhwa_favorito (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    id_usuario INT NOT NULL,
+    id_manhwa INT NOT NULL,
+    data_voto DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+    FOREIGN KEY (id_manhwa) REFERENCES manhwa(id),
+    UNIQUE (id_usuario) -- para garantir que cada usuário vote uma única vez
+);
+
 -- Inserts de manhwas principais
 insert into manhwa (titulo, autor, genero, sinopse, data_publicacao) values
 ('TBATE', 'TurtleMe', 'Fantasia', 'The Beginning After The End conta a história de King Grey, que renasce em um novo mundo.', '2018-01-01'),
@@ -130,6 +140,13 @@ INNER JOIN pergunta p ON r.id_pergunta = p.id
 INNER JOIN quiz q ON p.id_quiz = q.id
 GROUP BY u.nome
 ORDER BY totalQuizzesRespondidos DESC;
+
+-- votos por manhwa
+SELECT m.titulo, COUNT(mf.id) AS total_votos
+FROM manhwa_favorito mf
+JOIN manhwa m ON mf.id_manhwa = m.id
+GROUP BY m.titulo
+ORDER BY total_votos DESC;
 
 -- 5️ Mostra todos os manhwas cadastrados no sistema
 SELECT * FROM manhwa;

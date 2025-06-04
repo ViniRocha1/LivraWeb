@@ -57,24 +57,25 @@
 <script>
 
 
-      function entrar() {
-        console.log("Função entrar chamada!");
+    function entrar() {
 
         var emailVar = email_input.value;
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
             finalizarAguardar();
             return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
         }
 
         console.log("FORM LOGIN: ", emailVar);
         console.log("FORM SENHA: ", senhaVar);
 
-        console.log("Fazendo a requisição fetch()...")
-
         fetch("/usuarios/autenticar", {
-                        
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -85,26 +86,32 @@
             })
         }).then(function (resposta) {
             console.log("ESTOU NO THEN DO entrar()!")
-            console.log("Status da resposta:", resposta.status);
 
             if (resposta.ok) {
                 console.log(resposta);
-                console.log("Eu fiz o login");
 
-                console.log("Resposta do servidor:", resposta);
                 resposta.json().then(json => {
-                    console.log("JSON Recebido:", json);
+                    console.log(json);
+                    console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
-                    sessionStorage.CONECTADO = "conectado";
-                    window.location = "/dashboard.html";
-                    console.log(json)
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
+
+                    setTimeout(function () {
+                        window.location = "./dashboard.html";
+                    }, 1000); // apenas para exibir o loading
+
                 });
-                
+
             } else {
 
                 console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                    finalizarAguardar(texto);
+                });
             }
 
         }).catch(function (erro) {
@@ -112,6 +119,10 @@
         })
 
         return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
     }
 
 </script>

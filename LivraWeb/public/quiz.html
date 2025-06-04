@@ -5,35 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LivraWeb</title>
-    <link rel="stylesheet" href="./style/quiz.css">
-    <link rel="icon" href="./imagens/icon/marca icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles/quizLivraWeb.css">
+
 </head>
 
 
 <body>
-    <header id="header">
-        <div class="container">
-            <div class="navbar">
-                <nav>
-                    <ul>
-                        <li><a href="index.html">O Mangá</a></li>
-                        <li><a href="projeto.html">O Projeto</a></li>
-                        <li>
-                            <button onclick="exibirSessao()"><img src="./imagens/icon.png"></button>
-                            <div id="sessao">
-
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
+<header id="header">
+    <div class="container">
+        <div class="navbar">
+            <a href="index.html"><img src="assets/icon/iconLivro.png" alt="Logo LivraWeb" class="icon"></a>
+            <div class="navbarLinks">
+                <a href="index.html">Home</a>
+                <a href="#">Livros</a>
+                <a href="quiz.html">Quiz</a>
             </div>
         </div>
-    </header>
+    </div>
+</header>
     
     <div id="pontuacaoEJogo">
         <div class="botao_iniciar">
             <div class="titulo-principal">
-                <h1>QUIZ <span>MANHWAS</span></h1>
+                <h1>Quiz - <span> LivraWeb </span></h1>
             </div>
             <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
         </div>
@@ -45,99 +40,99 @@
 <script>
     let idUsuario = sessionStorage.ID_USUARIO
 
-    const listaDeQuestoes = [
+const listaDeQuestoes = [
 
-        {
-            pergunta: "Qual o nome do protagonista de Berserk?",
-            alternativaA: "Caska",
-            alternativaB: "Griffith",
-            alternativaC: "Guts",
-            alternativaD: "Gambino",
-            alternativaCorreta: "alternativaC"
-        },
+    // SOLO LEVELING
+    {
+        pergunta: "Qual o nome do protagonista de Solo Leveling?",
+        alternativaA: "Go Gun-Hee",
+        alternativaB: "Sung Jin-Woo",
+        alternativaC: "Igris",
+        alternativaD: "Choi Jong-In",
+        alternativaCorreta: "alternativaB"
+    },
+    {
+        pergunta: "Que tipo de classe Sung Jin-Woo recebe após sua reencarnação como jogador?",
+        alternativaA: "Mago Sombrio",
+        alternativaB: "Caçador de Batalha",
+        alternativaC: "Monarca das Sombras",
+        alternativaD: "Espadachim Real",
+        alternativaCorreta: "alternativaC"
+    },
 
-        {
-            pergunta: "Qual é o nome da espada usada por Guts após o Eclipse?",
-            alternativaA: "Dragonslayer",
-            alternativaB: "Godsbane",
-            alternativaC: "Beherit Blade",
-            alternativaD: "Titan Slayer",
-            alternativaCorreta: "alternativaA"
-        },
+    // TBATE
+    {
+        pergunta: "Quem é o protagonista de The Beginning After The End?",
+        alternativaA: "Arthur Leywin",
+        alternativaB: "Lucas Wykes",
+        alternativaC: "Rey Greyrat",
+        alternativaD: "Sylvie",
+        alternativaCorreta: "alternativaA"
+    },
+    {
+        pergunta: "Qual o nome da companheira dracônica de Arthur?",
+        alternativaA: "Silvie",
+        alternativaB: "Sylvie",
+        alternativaC: "Saphira",
+        alternativaD: "Sierra",
+        alternativaCorreta: "alternativaB"
+    },
 
-        {
-            pergunta: "Qual é o nome do grupo liderado por Griffith?",
-            alternativaA: "Cavaleiros da Luz",
-            alternativaB: "Mão de Deus",
-            alternativaC: "Bando do Falcão",
-            alternativaD: "Exército de Midland",
-            alternativaCorreta: "alternativaC"
-        },
+    // SECOND LIFE RANKER
+    {
+        pergunta: "Qual é o nome do protagonista de Second Life Ranker?",
+        alternativaA: "Yeon-woo",
+        alternativaB: "Baam",
+        alternativaC: "Jin-Woo",
+        alternativaD: "Han Soo",
+        alternativaCorreta: "alternativaA"
+    },
+    {
+        pergunta: "Qual o objetivo de Yeon-woo ao entrar na Torre?",
+        alternativaA: "Ganhar poder",
+        alternativaB: "Vingar seu irmão",
+        alternativaC: "Dominar os andares",
+        alternativaD: "Fugir de seu passado",
+        alternativaCorreta: "alternativaB"
+    },
 
-        {
-            pergunta: "O que é um Behelit?",
-            alternativaA: "Uma armadura mágica",
-            alternativaB: "Uma chave para o Inferno",
-            alternativaC: "Um artefato usado para invocar a Mão de Deus",
-            alternativaD: "Um demônio selado",
-            alternativaCorreta: "alternativaC"
-        },
+    // HEAVENLY DEMON REBORN!
+    {
+        pergunta: "Quem é o protagonista de Heavenly Demon Reborn?",
+        alternativaA: "Chun Ma",
+        alternativaB: "Yoo Won",
+        alternativaC: "Hyuk Woon Seong",
+        alternativaD: "Baek Chun",
+        alternativaCorreta: "alternativaC"
+    },
+    {
+        pergunta: "Qual seita trai o protagonista no início da história?",
+        alternativaA: "Seita do Céu Celestial",
+        alternativaB: "Igreja do Deus da Guerra",
+        alternativaC: "Seita do Demônio Celestial",
+        alternativaD: "Pavilhão do Dragão Carmesim",
+        alternativaCorreta: "alternativaA"
+    },
 
-        {
-            pergunta: "Quem foi o criador de Berserk?",
-            alternativaA: "Yoshihiro Togashi",
-            alternativaB: "Kentaro Miura",
-            alternativaC: "Hajime Isayama",
-            alternativaD: "Naoki Urasawa",
-            alternativaCorreta: "alternativaB"
-        },
+    // REVENGE OF THE IRON-BLOODED SWORD HOUND
+    {
+        pergunta: "Qual o nome do protagonista de Revenge of the Iron-Blooded Sword Hound?",
+        alternativaA: "Vikir Van Baskerville",
+        alternativaB: "Aran Baskerville",
+        alternativaC: "Cain Pendragon",
+        alternativaD: "Julius",
+        alternativaCorreta: "alternativaA"
+    },
+    {
+        pergunta: "O que motiva o protagonista a buscar vingança?",
+        alternativaA: "A morte de sua esposa",
+        alternativaB: "A destruição de seu clã",
+        alternativaC: "A humilhação e execução injusta",
+        alternativaD: "O roubo de sua herança",
+        alternativaCorreta: "alternativaC"
+    }
 
-        {
-            pergunta: "Como se chama a armadura amaldiçoada que Guts usa?",
-            alternativaA: "Armadura Carmesim",
-            alternativaB: "Berserker Armor",
-            alternativaC: "Dark Wolf Armor",
-            alternativaD: "Eclipse Armor",
-            alternativaCorreta: "alternativaB"
-        },
-
-        {
-            pergunta: "Qual o nome da elfa que acompanha Guts?",
-            alternativaA: "Pixie",
-            alternativaB: "Fae",
-            alternativaC: "Luna",
-            alternativaD: "Puck",
-            alternativaCorreta: "alternativaD"
-        },
-
-        {
-            pergunta: "Qual é o principal objetivo de Guts após o Eclipse?",
-            alternativaA: "Matar Griffith",
-            alternativaB: "Recuperar o trono de Midland",
-            alternativaC: "Destruir a Mão de Deus",
-            alternativaD: "Encontrar seu passado",
-            alternativaCorreta: "alternativaA"
-        },
-
-        {
-            pergunta: "O que Griffith deseja acima de tudo?",
-            alternativaA: "Vingança",
-            alternativaB: "Amor",
-            alternativaC: "Poder absoluto",
-            alternativaD: "Ter seu próprio reino",
-            alternativaCorreta: "alternativaD"
-        },
-
-        {
-            pergunta: "Como se chama o evento traumático em que a maioria do Bando do Falcão é sacrificada?",
-            alternativaA: "Noite Sangrenta",
-            alternativaB: "Sacrifício Carmesim",
-            alternativaC: "Eclipse",
-            alternativaD: "Banquete das Almas",
-            alternativaCorreta: "alternativaC"
-        }
-
-    ]
+]
 
     // variáveis globais    
     let numeroDaQuestaoAtual = 0
@@ -154,23 +149,23 @@
         pontuacaoEJogo.innerHTML = `
         <div id="pontuacao" class="flex-colunar width-fit-content-1 border-primary">
             <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
-                <span class="acertos">Quantidade de acertos: <br><span id="spanCertas">***</span></span>
-                <hr>
-                <span class="erros">Quantidade de erros: <br><span id="spanErradas">***</span></span>
-                <hr>
+                <span class="acertos">Quantidade de acertos: <br><span id="spanCertas">0</span></span>
+                <br>
+                <span class="erros">Quantidade de erros: <br><span id="spanErradas">0</span></span>
+                <br>
             </div>
             <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
                 <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
-                    <br><span id="spanPontuacaoFinal">***</span>
+                    <br><span id="spanPontuacaoFinal">0</span>
                 </span>
                 <hr>
-                <span id="msgFinal" class="width-fit-content">***</span>
+                <span id="msgFinal" class="width-fit-content">0</span>
             </div>
         </div>
 
         <div class="conteudo-jogo">
             <div class="titulo-principal">
-            <h1>QUIZ <span>BERSERK</span></h1>
+            <h1>QUIZ <span>LIVRAWEB</span></h1>
         </div>
 
         <div id="jogo" class="width-fit-content-2 flex-colunar border-secondary">
@@ -188,28 +183,27 @@
                 <span><em>Escolha uma opção dentre as abaixo:</em></span>
             </div>
 
-            <div id="opcoes" class="flex-colunar padding-8">
-                <span>
-                    <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
-                    <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
-                </span>
-                <span>
-                    <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
-                    <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
-                </span>
-                <span>
-                    <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
-                    <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
-                </span>
-                <span>
-                    <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
-                    <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
-                </span>
-            </div>
+         <div id="opcoes" class="grid-opcoes padding-8">
+    <div class="opcao">
+        <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
+        <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
+    </div>
+    <div class="opcao">
+        <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
+        <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
+    </div>
+    <div class="opcao">
+        <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
+        <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
+    </div>
+    <div class="opcao">
+        <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
+        <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
+    </div>
+</div>
 
             <div id="botoes" class="flex-colunar padding-8">
-                <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
-                <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
+                <button onclick="Enviar()" id="btnEnviar">Enviar resposta</button>
                 <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
                 <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
             </div>
@@ -222,10 +216,9 @@
 
         preencherHTMLcomQuestaoAtual(0)
 
-        btnSubmeter.disabled = false
-        btnProx.disabled = true
+        btnEnviar.disabled = false
         // btnConcluir.disabled = true
-        btnTentarNovamente.disabled = true
+        btnTentarNovamente.disabled = false
     }
 
     function preencherHTMLcomQuestaoAtual(index) {
@@ -242,28 +235,38 @@
         document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
     }
 
-    function submeter() {
-        const options = document.getElementsByName("option"); // recupera alternativas no html
+function Enviar() {
+    const options = document.getElementsByName("option");
 
-        let hasChecked = false
-        for (let i = 0; i < options.length; i++) {
-            if (options[i].checked) {
-                hasChecked = true
-                break
-            }
-        }
-
-        if (!hasChecked) {
-            alert("Não há alternativas escolhidas. Escolha uma opção.")
-        } else {
-            btnSubmeter.disabled = true
-            btnProx.disabled = false
-
-            habilitarAlternativas(false)
-
-            checarResposta()
+    let hasChecked = false;
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].checked) {
+            hasChecked = true;
+            break;
         }
     }
+
+    if (!hasChecked) {
+        alert("Não há alternativas escolhidas. Escolha uma opção.");
+        return;
+    }
+
+    btnEnviar.disabled = true;
+    habilitarAlternativas(false);
+    checarResposta();
+
+    setTimeout(() => {
+        desmarcarRadioButtons();
+        limparCoresBackgroundOpcoes();
+
+        if (numeroDaQuestaoAtual < quantidadeDeQuestoes) {
+            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
+            btnEnviar.disabled = false;
+        } else {
+            finalizarJogo();
+        }
+    }, 1200); // espera 1,2s para mostrar se acertou/errou antes de mudar a pergunta
+}
 
     function habilitarAlternativas(trueOrFalse) {
         let opcaoEscolhida = trueOrFalse ? false : true
@@ -275,27 +278,27 @@
 
     }
 
-    function avancar() {
-        btnProx.disabled = true
-        btnSubmeter.disabled = false
+function tentarNovamente() {
+    // Resetar variáveis
+    numeroDaQuestaoAtual = 0;
+    pontuacaoFinal = 0;
+    tentativaIncorreta = 0;
+    certas = 0;
+    erradas = 0;
 
-        desmarcarRadioButtons()
+    // Resetar visual
+    const msgFinal = document.getElementById('msgFinal');
+    msgFinal.innerHTML = '';
+    msgFinal.classList.remove("text-danger-with-bg", "text-warning-with-bg", "text-success-with-bg");
 
-        if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
-            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
-        } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) {
-            alert("Atenção... a próxima é a ultima questão!")
-            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
-        } else {
-            finalizarJogo()
-        }
-        limparCoresBackgroundOpcoes()
+    const jogoDiv = document.getElementById('jogo');
+    if (jogoDiv) {
+        jogoDiv.classList.remove("text-new-gray");
     }
 
-    function tentarNovamente() {
-        // atualiza a página
-        window.location.reload()
-    }
+    // Recriar o quiz
+    iniciarQuiz();
+}
 
     function checarResposta() {
         const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
@@ -347,53 +350,61 @@
             options[i].checked = false;
         }
     }
+function finalizarJogo() {
+    let textoParaMensagemFinal = null
+    let classComCoresParaMensagemFinal = null
+    const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes * 100
 
-    function finalizarJogo() {
-        let textoParaMensagemFinal = null
-        let classComCoresParaMensagemFinal = null
-        const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes * 100
+    // Define cor e texto da mensagem final (mantém sua lógica)
+    if (porcentagemFinalDeAcertos <= 30) {
+        textoParaMensagemFinal = "Parece que você não estudou..."
+        classComCoresParaMensagemFinal = "text-danger-with-bg"
+    }
+    else if (porcentagemFinalDeAcertos > 30 && porcentagemFinalDeAcertos < 80) {
+        textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
+        classComCoresParaMensagemFinal = "text-warning-with-bg"
+    }
+    else if (porcentagemFinalDeAcertos >= 80) {
+        textoParaMensagemFinal = "Uau, parabéns!"
+        classComCoresParaMensagemFinal = "text-success-with-bg"
+    }
 
-        if (porcentagemFinalDeAcertos <= 30) {
-            textoParaMensagemFinal = "Parece que você não estudou..."
-            classComCoresParaMensagemFinal = "text-danger-with-bg"
-        }
-        else if (porcentagemFinalDeAcertos > 30 && porcentagemFinalDeAcertos < 80) {
-            textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
-            classComCoresParaMensagemFinal = "text-warning-with-bg"
-        }
-        else if (porcentagemFinalDeAcertos >= 80) {
-            textoParaMensagemFinal = "Uau, parabéns!"
-            classComCoresParaMensagemFinal = "text-success-with-bg"
-        }
+    textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)) + "% das questões."
 
-        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)) + "% das questões."
+    document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
+    document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
+    document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
 
+    // Agora define a cor da pontuação final com base na quantidade de acertos (pontuacaoFinal)
+    const spanPontuacaoFinal = document.getElementById('spanPontuacaoFinal')
+    spanPontuacaoFinal.classList.remove("text-danger-final", "text-warning-final", "text-success-final")
 
-        document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
-        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
-        document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
+    if (pontuacaoFinal <= 5) {
+        spanPontuacaoFinal.classList.add("text-danger-final")
+    } else if (pontuacaoFinal === 6 || pontuacaoFinal === 7) {
+        spanPontuacaoFinal.classList.add("text-warning-final")
+    } else if (pontuacaoFinal > 7) {
+        spanPontuacaoFinal.classList.add("text-success-final")
+    }
 
-        document.getElementById('jogo').classList.add("text-new-gray")
+    document.getElementById('jogo').classList.add("text-new-gray")
 
-        btnProx.disabled = true
-        btnSubmeter.disabled = true
-        // btnConcluir.disabled = true
-        btnTentarNovamente.disabled = false
+    btnProx.disabled = true
+    btnEnviar.disabled = true
+    btnTentarNovamente.disabled = false
 
-        fetch(`/quiz/cadastrarRespostas/`,{
+    fetch(`/quiz/cadastrarRespostas/`, {
         method: 'POST',
-        headers: {"Content-Type": "application/json"}, 
-        body: JSON.stringify ({ 
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
             id_usuarioServer: sessionStorage.ID_USUARIO,
             resultadoServer: porcentagemFinalDeAcertos
-        })})
-        .then(
-        (response)=>{
-            if (!response.ok){throw new Error('Ocorreu um erro ao cadastrar as respostas' + response.status)}
-            if (response.status === 204){return{}}
-            return response.json()
-        }).catch((erro)=>{console.log(erro)})
-
-        window.location = "/dashboard.html";
-    }
+        })
+    })
+    .then((response) => {
+        if (!response.ok) { throw new Error('Ocorreu um erro ao cadastrar as respostas' + response.status) }
+        if (response.status === 204) { return {} }
+        return response.json()
+    }).catch((erro) => { console.log(erro) })
+}
 </script>
