@@ -19,7 +19,7 @@
                     <li><a href="index.html"> Home </a></li>
                     <li><a href="livros.html"> livros </a></li>
                     <li><a href="votarManhwa.html"> Manhwas </a></li>
-                    <li><a href="quiz.html"> Quiz </a></li>
+                    <li><a href="quiz.html"> Quiz</a></li>
                     <li>
                         <img src="assets/icon/iconLivro.png" alt="Ícone Livro" />
                     </li>
@@ -33,12 +33,12 @@
     <div class="content">
         <div class="graficos">
             <div class="graficoManhwas">
-                <canvas id="graficoManhwas"></canvas>
-            </div>
-            <div class="graficoManhwa">
                 <canvas id="graficoManhwa"></canvas>
             </div>
-            <div class="graficoResultado">
+            <div class="graficoGenero">
+                <canvas id="graficoGenero"></canvas>
+            </div>
+            <div class="graficoResul    tado">
                 <canvas id="graficoResultado"></canvas>
             </div>
         </div>
@@ -51,9 +51,25 @@
             fetch(`/dashboard/buscarmanhwaFav`, { cache: 'no-store' }).then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
-                        // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        //console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                         resposta.reverse();
                         graficoManhwa(resposta);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            }).catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+        }
+
+        function buscarGeneroFav() {
+            fetch(`/dashboard/buscargeneroFav`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos genero: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+                        graficoGenero(resposta);
                     });
                 } else {
                     console.error('Nenhum dado encontrado ou erro na API');
@@ -74,7 +90,33 @@
                 valores.push(resposta[i].qtd)
             }
 
-            const ctx = document.getElementById('graficoManhwa').getContext('2d');
+            const ctx = document.getElementById('graficoManhwa');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Votos',
+                        data: valores,
+                        backgroundColor: 'rgba(210, 18, 22, 0.2)',
+                        borderColor: 'rgba(210, 18, 22, 1)',
+                        borderWidth: 1 
+                    }]
+                }
+            });
+        }
+
+        function graficoGenero(resposta) {
+            
+            const labels = [];
+            const valores = [];
+
+            for (let i = 0; i< resposta.length; i++){
+                labels.push(resposta[i].genero)
+                valores.push(resposta[i].qtd)
+            }
+
+            const ctx = document.getElementById('graficoGenero');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -176,7 +218,8 @@
                         <span2>aqui esta o gráfico de resposta de todos os usuários em relação ao quiz</span2>`;
 
             buscarManhwaFav();
-           // buscarResultado();
+            buscarGeneroFav();
+        //    buscarResultado();
         };
 
     </script>

@@ -7,4 +7,8 @@ router.post("/cadastrar", function(req, res) {
     votacaoController.cadastrarVoto(req, res);
 });
 
+router.post("/cadastrar", function(req, res) {
+    votacaoController.cadastrarGenero(req, res);
+});
+
 module.exports = router;

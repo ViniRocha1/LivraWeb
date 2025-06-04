@@ -51,6 +51,11 @@ header {
   align-items: center;
 }
 
+.icon {
+    width: 120px;
+    height: 80px;
+}
+
 .navbar ul {
   display: flex;
   flex-direction: column;
@@ -88,7 +93,9 @@ header {
   display: block;
 }
 
-.content,y #pontuacaoEJogo {
+
+
+#pontuacaoEJogo {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,7 +103,7 @@ header {
     padding-top: 80px;
 }
 
-.content, .botao_iniciar {
+.botao_iniciar {
     background-color: #2e2e44;
     padding: 40px 60px;
     border-radius: 20px;

@@ -27,10 +27,14 @@
     <h1 class="titulo-principal">QUESTIONÁRIO <span>MANHWAS</span></h1>
 
     <section class="votacao-secao">
-      <h2>Qual seu <span class="destaque">Manhwa</span> favorito?</h2>
+      <h2>Qual é o seu <span class="destaque">Manhwa</span>        
+        e <span class="destaque"> Gênero </span> favorito? </h2>
+
       <div class="imagem-preview">
         <img id="imgManhwa" src="" alt="Imagem Manhwa" style="display:none;" />
       </div>
+
+      <div class="separar">
       <select id="manhwas" class="select-manhwa">
         <option value="#">SELECIONE</option>
         <option value="2">Solo Leveling</option>
@@ -39,6 +43,16 @@
         <option value="4">Heavenly Demon Reborn</option>
         <option value="5">Revenge of the Iron-Blooded Sword Hound</option>
       </select>
+      <br>
+      <br>
+                    
+      <select id="genero" class="select-genero">
+        <option value="acao"> Ação </option>
+        <option value="fantasia"> Fantasia </option>
+        <option value="aventura"> Aventura </option>
+
+      </select>
+    </div>
     </section>
 
     <div class="botao-container">
@@ -47,17 +61,19 @@
   </main>
 
   <script>
+    const generoSelect = document.getElementById('genero')
     const manhwaSelect = document.getElementById('manhwas');
     const manhwaImg = document.getElementById('imgManhwa');
     const valorSelecionado = manhwaSelect.value
+    const valorGeneroSelecionado = generoSelect.value
 
 
     const imagensManhwas = {
-      solo: 'assets/img/soloLevelingCarrossel.jpg',
-      tbat: 'assets/img/TBAT.jpg',
-      second: 'assets/img/secondLifeRanker.jpg',
-      heavenly: 'assets/img/Heavenly.webp',
-      revenge: 'assets/img/revengeIronBloodedSwordHound.webp'
+      2: 'assets/img/soloLevelingCarrossel.jpg',
+      1: 'assets/img/TBAT.jpg',
+      3: 'assets/img/secondLifeRanker.jpg',
+      4: 'assets/img/Heavenly.webp',
+      5: 'assets/img/revengeIronBloodedSwordHound.webp'
     };
 
     manhwaSelect.addEventListener('change', () => {
@@ -72,6 +88,7 @@
 
     function cadastrarVoto() {
       const selecionado = manhwaSelect.value;
+
       if (selecionado == "#" || !selecionado) {
         alert('Por favor, selecione um Manhwa.');
         return;
@@ -84,9 +101,46 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id_usuario: sessionStorage.ID_USUARIO,
-          id_manhwa: selecionado
+          id_manhwa: selecionado,
         })                                                                                                                  
       })                                                                               
+      .then(res => {
+        if (!res.ok) {
+          res.text().then(texto=>{
+            console.error(texto)
+          })
+          return;
+        };
+
+        alert('Voto cadastrado com sucesso!');
+        window.location.href = "/dashboard.html";
+
+
+      })
+      .catch(erro => {
+        console.error(erro);
+        alert('Erro ao cadastrar voto.');
+      });
+    }
+
+    function cadastrarGenero(){
+
+      const generoSelecionado = generoSelect.value
+
+      if (generoSelecionado == "#" || !generoSelecionado) {
+        alert('Por favor, selecione um Gênero.');
+        return;
+      }
+      
+      console.log(generoSelecionado)
+
+      fetch(`/votacao/cadastrar`, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          genero: generoSelecionado,
+        })                                                                                                                  
+      })      
       .then(res => {
         if (!res.ok) {
           res.text().then(texto=>{

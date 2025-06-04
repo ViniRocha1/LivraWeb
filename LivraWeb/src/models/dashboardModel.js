@@ -13,6 +13,18 @@ function buscarManhwaFav() {
     return database.executar(instrucaoSql);
 }
 
+function buscarGeneroFav() {
+    var instrucaoSql = `
+        select m.genero,
+        COUNT(mf.id_manhwa) qtd
+        from manhwa_favorito mf
+        join manhwa m on mf.id_manhwa = m.id
+        group by m.genero;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function buscarResultado() {
     var instrucaoSql = `
     SELECT resultado 
@@ -23,7 +35,7 @@ function buscarResultado() {
 }
 
 module.exports = {
-    buscarManhwaFav
-,
+    buscarManhwaFav,
+    buscarGeneroFav,
     buscarResultado
 };

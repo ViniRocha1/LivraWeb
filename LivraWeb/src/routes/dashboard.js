@@ -7,8 +7,8 @@ router.get("/buscarManhwaFav", function (req, res) {
     dashboardController.buscarManhwaFav(req, res);
 });
 
-router.get("/buscarResultado", function (req, res) {
-    dashboardController.buscarResultado(req, res);
+router.get("/buscargeneroFav", function (req, res) {
+    dashboardController.buscarGeneroFav(req, res);
 });
 
 module.exports = router;

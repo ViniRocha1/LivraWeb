@@ -105,7 +105,7 @@ header {
   min-height: 100vh;
   background: linear-gradient(135deg, #3f357f, #272352);
   border-radius: 15px;
-  max-width: 800px;
+  max-width: 86%;
   margin-top: 40px;
 }
 
@@ -152,7 +152,27 @@ header {
   margin: 0 auto;
 }
 
+.separar {
+  display: flex;
+  justify-content: space-around;
+}
+
 .select-manhwa {
+  width: 100%;
+  max-width: 400px;
+  font-size: 1.8rem;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background-color: #463e7a;
+  color: #d6ccff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+}
+
+.select-genero {
   width: 100%;
   max-width: 400px;
   font-size: 1.8rem;
@@ -167,6 +187,10 @@ header {
 }
 
 .select-manhwa:hover, .select-manhwa:focus {
+  background-color: #5f4bb7;
+}
+
+.select-genero:hover, .select-genero:focus {
   background-color: #5f4bb7;
 }
 

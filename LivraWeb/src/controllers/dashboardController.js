@@ -10,6 +10,16 @@ function buscarManhwaFav(req, res) {
     });
 }
 
+function buscarGeneroFav(req, res) {
+    dashboardModel.buscarGeneroFav().then(function (resultado) {
+        res.status(200).json(resultado);
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar o Manhwa favorito.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function buscarResultado(req, res) {
     dashboardModel.buscarResultado().then(function (resultado) {
         res.status(200).json(resultado);
@@ -22,5 +32,6 @@ function buscarResultado(req, res) {
 
 module.exports = {
     buscarManhwaFav,
+    buscarGeneroFav,
     buscarResultado
 }
