@@ -14,7 +14,7 @@
             
            <a href="index.html"><img src="assets/icon/iconLivro.png" alt="Logo Lagotto" class="icon"></a>
             <div class="navbarLinks">
-                <a href="cadastro.html">Livros</a>
+                <a href="livros.html">Livros</a>
                     <a href="cadastro.html">Quiz</a>
                 <a href="cadastro.html"><button>Cadastrar-se</button></a>
             </div>
@@ -43,46 +43,49 @@
             </div>
 
 
-   <section class="section-books" id="livros">
+<section class="section-books" id="livros">
+  <h2>Ler Agora</h2>
+  <br>
 
-    <h2>Ler Agora</h2>
-    <br>
+  <div class="carousel-container">
+    <!-- Botão esquerda -->
+    <button class="arrow arrow-left" onclick="scrollCarousel(-1)">‹</button>
 
-    <div class="carousel-container">
-
-      <button class="arrow arrow-left" onclick="scrollCarousel(-1)">‹</button>
-      <div class="carousel" id="carousel">
-
-        <div class="book-card">
-          <img src="assets/img/soloLevelingCarrossel.jpg" alt="Livro 1">
-          <h3>Solo Leveling</h3>
-          <button>Ler Livro</button>
-        </div>
-        <div class="book-card">
-          <img src="assets/img/TBAT.jpg" alt="Livro 2">
-          <h3>The Beggining After The End</h3>
-          <button>Ler Livro</button>
-        </div>
-        <div class="book-card">
-          <img src="assets/img/secondLifeRanker.jpg" alt="Livro 3">
-          <h3>Second Life Ranker</h3>
-          <button>Ler Livro</button>
-        </div>
-        <div class="book-card">
-          <img src="assets/img/Heavenly.webp" alt="Livro 4">
-          <h3>Heavenly Inquisition Sword</h3>
-          <button>Ler Livro</button>
-        </div>
-        <div class="book-card">
-          <img src="assets/img/revengeIronBloodedSwordHound.webp" alt="Livro 5">
-          <h3>Revenge Iron-Blooded Sword Hound</h3>
-          <button>Ler Livro</button>
-        </div>
+    <!-- Área de rolagem com cards -->
+    <div class="carousel" id="carousel">
+      <!-- Cada card de livro -->
+      <div class="book-card">
+        <img src="assets/img/soloLevelingCarrossel.jpg" alt="Livro 1">
+        <h3>Solo Leveling</h3>
+        <button>Ler Livro</button>
       </div>
-      <button class="arrow arrow-right" onclick="scrollCarousel(1)">›</button>
+      <div class="book-card">
+        <img src="assets/img/TBAT.jpg" alt="Livro 2">
+        <h3>The Beginning After The End</h3>
+        <button>Ler Livro</button>
+      </div>
+      <div class="book-card">
+        <img src="assets/img/secondLifeRanker.jpg" alt="Livro 3">
+        <h3>Second Life Ranker</h3>
+        <button>Ler Livro</button>
+      </div>
+      <div class="book-card">
+        <img src="assets/img/Heavenly.webp" alt="Livro 4">
+        <h3>Heavenly Inquisition Sword</h3>
+        <button>Ler Livro</button>
+      </div>
+      <div class="book-card">
+        <img src="assets/img/revengeIronBloodedSwordHound.webp" alt="Livro 5">
+        <h3>Revenge Iron-Blooded Sword Hound</h3>
+        <button>Ler Livro</button>
+      </div>
     </div>
-  </section>
-        </div>
+
+    <button class="arrow arrow-right" onclick="scrollCarousel(1)">›</button>
+  </div>
+</section>
+
+ </div>
     </div>
 
     <div class="spacing"></div>
@@ -101,76 +104,47 @@
             </div>
         </div>
     </div>
-   
-    <div class="footer">
-        <div class="container">
-            <div class="LivraWebInc">
-                <img src="assets/icon/iconLivro.png" alt="logo LivraWeb" class="imgFooter">
-                
-                <h4>© 2025 LivraWeb, Inc. - Todos os direitos reservados.</h4>
-            </div>
-            <div class="lista">
-                <ol>
-                    <li><span>Recursos</span></li>
-                    <li>Livros</li>
-                    <li>Leituras</li>
-                    <li>Quizes</li>
-                </ol>
-            </div>
-            <div class="lista">
-                <ol>
-                    <li><span>Sobre a LivraWeb</span></li>
-                    <li>Equipe</li>
-                    <li>História</li>
-
-                </ol>
-            </div>
-            <div class="lista">
-                <ol>
-                    <li><span>Legalidade</span></li>
-                    <li>Conformidade Regulatória</li>
-                    <li>Cookies</li>
-                    <li>Privacidade</li>
-                    <li>Termos de Serviço</li>
-                </ol>
-            </div>
+   <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-left">
+          <h3>LivraWeb</h3>
+          <p>Conectando leitores ao universo dos manhwas e mangás.</p>
         </div>
-    </div>
+        <div class="footer-right">
+          <a href="index.html">Início</a>
+          <a href="livros.html">Livros</a>
+          <a href="cadastro.html">Quiz</a>
+          <a href="cadastro.html">Cadastro</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 LivraWeb. Todos os direitos reservados.</p>
+      </div>
+    </footer>
 
-     <script>
-    const carousel = document.getElementById('carousel');
-    const cards = Array.from(carousel.children);
-    const cardWidth = cards[0].offsetWidth + 16; // largura + gap
+<script>
+  const carousel = document.getElementById('carousel');
+  const cards = document.querySelectorAll('.book-card');
 
-    // Clonagem de livros
-    const cloneFirst = cards.slice(0, 3).map(card => card.cloneNode(true));
-    const cloneLast = cards.slice(-3).map(card => card.cloneNode(true));
+  const tamanhoCard = cards[0].offsetWidth + 16;
 
-    cloneFirst.forEach(card => carousel.appendChild(card));
-    cloneLast.reverse().forEach(card => carousel.insertBefore(card, carousel.firstChild));
+  const totalCards = cards.length;
 
-    // Ajusta a posição inicial
-    carousel.scrollLeft = cardWidth * 3;
+  let posicaoAtual = 0;
 
-    // Função de rolagem
-    function scrollCarousel(direction) {
-      carousel.scrollBy({
-        left: direction * cardWidth,
-        behavior: 'smooth'
-      });
-    }
+ 
+  function scrollCarousel(direcao) {
+    posicaoAtual = (posicaoAtual + direcao + totalCards) % totalCards;
 
-    // Detecta o final e reposiciona o scroll
-    carousel.addEventListener('scroll', () => {
-      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+    const qtdPixelParaNovaPosicao = posicaoAtual * tamanhoCard;
 
-      if (carousel.scrollLeft <= 0) {
-        carousel.scrollLeft = maxScroll - (cardWidth * 6); // Pular para o final dos clones
-      } else if (carousel.scrollLeft >= maxScroll - cardWidth * 3) {
-        carousel.scrollLeft = cardWidth * 3; // Volta para o início dos clones
-      }
+    carousel.scrollTo({
+      left: qtdPixelParaNovaPosicao,
+      behavior: 'smooth'
     });
-  </script>
+  }
+</script>
+
 
 </body>
 

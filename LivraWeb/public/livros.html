@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Livros | LivraWeb</title>
+  <link rel="stylesheet" href="styles/livros.css"/>
+
+</head>
+<body>
+  <!-- Navbar (mesma estrutura) -->
+  <div class="navbar">
+    <a href="index.html"><img src="assets/icon/iconLivro.png" alt="Logo LivraWeb" class="icon"></a>
+    <div class="navbarLinks">
+      <a href="index.html"> Home </a>
+      <a href="cadastro.html">Quiz</a>
+      <a href="cadastro.html"><button>Cadastrar-se</button></a>
+    </div>
+  </div>
+
+  <div class="main-content">
+    <div class="descricao">
+      <h2>Explore o Universo dos Manhwas e Mangás</h2>
+      <p>
+        Os <strong>manhwas</strong> coreanos e os <strong>mangás</strong> japoneses têm conquistado fãs ao redor do mundo com suas narrativas envolventes,
+        estilos artísticos marcantes e personagens inesquecíveis. Enquanto os mangás geralmente seguem o formato impresso em preto e branco, os manhwas,
+        em sua maioria digitais, encantam com cores vibrantes e leitura fluida. Navegue por nossa biblioteca e descubra histórias que vão desde épicas
+        de vingança até jornadas emocionantes de crescimento pessoal.
+      </p>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Pesquisar por título, autor ou gênero..." onkeyup="filterBooks()" />
+    </div>
+
+    <div class="books-grid" id="bookList">
+      <div class="book-card" data-titulo="Solo Leveling" data-autor="Chugong" data-genero="Ação">
+        <img src="assets/img/soloLevelingCarrossel.jpg" alt="Solo Leveling"/>
+        <h3>Solo Leveling</h3>
+        <p>Autor: Chugong<br>Gênero: Ação</p>
+      </div>
+
+      <div class="book-card" data-titulo="The Beginning After The End" data-autor="TurtleMe" data-genero="Fantasia">
+        <img src="assets/img/TBAT.jpg" alt="TBATE"/>
+        <h3>TBATE</h3>
+        <p>Autor: TurtleMe<br>Gênero: Fantasia</p>
+      </div>
+
+      <div class="book-card" data-titulo="Second Life Ranker" data-autor="Sadoyeon" data-genero="Aventura">
+        <img src="assets/img/secondLifeRanker.jpg" alt="Second Life Ranker"/>
+        <h3>Second Life Ranker</h3>
+        <p>Autor: Sadoyeon<br>Gênero: Aventura</p>
+      </div>
+
+      <div class="book-card" data-titulo="Heavenly Inquisition Sword" data-autor="Hajun Im" data-genero="Ação">
+        <img src="assets/img/Heavenly.webp" alt="Heavenly Inquisition Sword"/>
+        <h3>Heavenly Inquisition Sword</h3>
+        <p>Autor: Hajun Im<br>Gênero: Ação</p>
+      </div>
+
+      <div class="book-card" data-titulo="Revenge Iron-Blooded Sword Hound" data-autor="Unknown" data-genero="Fantasia">
+        <img src="assets/img/revengeIronBloodedSwordHound.webp" alt="Revenge Iron-Blooded Sword Hound"/>
+        <h3>Revenge Iron-Blooded Sword Hound</h3>
+        <p>Autor: Unknown<br>Gênero: Fantasia</p>
+      </div>
+    </div>
+  </div>
+
+   <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-left">
+          <h3>LivraWeb</h3>
+          <p>Conectando leitores ao universo dos manhwas e mangás.</p>
+        </div>
+        <div class="footer-right">
+          <a href="index.html">Início</a>
+          <a href="livros.html">Livros</a>
+          <a href="cadastro.html">Quiz</a>
+          <a href="cadastro.html">Cadastro</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 LivraWeb. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+  <script>
+    function filterBooks() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.book-card');
+
+      cards.forEach(card => {
+        const titulo = card.dataset.titulo.toLowerCase();
+        const autor = card.dataset.autor.toLowerCase();
+        const genero = card.dataset.genero.toLowerCase();
+
+        if (titulo.includes(input) || autor.includes(input) || genero.includes(input)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

@@ -24,51 +24,20 @@ create table if not exists manhwa (
 -- Tabela de quiz
 create table if not exists quiz (
     id int primary key not null auto_increment,
-    titulo varchar(150) not null,
+    id_usuario int not null, 
+    resultado int,
+	foreign key (id_usuario) references usuario(id)
+);
+
+create table if not exists manhwa_quiz (
     id_manhwa int not null,
-    total_perguntas int not null,
-    foreign key (id_manhwa) references manhwa(id)
-);
-
--- Tabela de pergunta
-create table if not exists pergunta (
-    id int primary key not null auto_increment,
-    enunciado text not null,
     id_quiz int not null,
-    foreign key (id_quiz) references quiz(id)
-);
-
--- Tabela de alternativa
-create table if not exists alternativa (
-    id int primary key not null auto_increment,
-    texto varchar(255) not null,
-    correta boolean not null,
-    id_pergunta int not null,
-    foreign key (id_pergunta) references pergunta(id)
-);
-
--- Tabela de resposta do usuário
-create table if not exists resposta_usuario (
-    id_usuario int not null,
-    id_pergunta int not null,
-    id_alternativa int not null,
-    data_resposta datetime default current_timestamp,
-    primary key (id_usuario, id_pergunta),
-    foreign key (id_usuario) references usuario(id),
-    foreign key (id_pergunta) references pergunta(id),
-    foreign key (id_alternativa) references alternativa(id)
-);
-
--- Nova tabela pontuacao para controlar tentativas e pontuações
-create table if not exists pontuacao (
-    id int primary key auto_increment,
-    tentativa int not null,
-    fkQuiz int not null,
-    fkUsuario int not null,
-    pontuacao int not null,
-    data_registro datetime default current_timestamp,
-    foreign key (fkQuiz) references quiz(id),
-    foreign key (fkUsuario) references usuario(id)
+    id_usuario int not null, 
+    PRIMARY KEY (id_manhwa, id_quiz),
+    FOREIGN KEY (id_manhwa) REFERENCES manhwa(id),
+    FOREIGN KEY (id_quiz) REFERENCES quiz(id),
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+    
 );
 
 CREATE TABLE IF NOT EXISTS manhwa_favorito (
@@ -89,63 +58,20 @@ insert into manhwa (titulo, autor, genero, sinopse, data_publicacao) values
 ('Heavenly Inquisition Sword', 'Hajun Im', 'Ação', 'Um jovem busca se vingar de traidores.', '2020-05-01'),
 ('Revenge Iron-Blooded Sword Hound', 'Unknown', 'Fantasia', 'Uma história de vingança e honra em um mundo brutal.', '2021-03-01');
 
--- Calcula a porcentagem de usuários que responderam quizzes de cada manhwa
-SELECT 
-    m.titulo AS manhwa,
-    ROUND((COUNT(DISTINCT r.id_usuario) * 100.0) / (SELECT COUNT(*) FROM usuario), 2) AS porcentagemUsuarios
-FROM resposta_usuario r
-INNER JOIN pergunta p ON r.id_pergunta = p.id
-INNER JOIN quiz q ON p.id_quiz = q.id
-INNER JOIN manhwa m ON q.id_manhwa = m.id
-GROUP BY m.titulo;
 
--- 2️ Mostra para um usuário específico o total de respostas e data da última resposta por manhwa
-SELECT 
-    u.nome,
-    m.titulo AS manhwa,
-    COUNT(*) AS totalRespostas,
-    MAX(r.data_resposta) AS ultimaResposta
-FROM resposta_usuario r
-INNER JOIN usuario u ON r.id_usuario = u.id
-INNER JOIN pergunta p ON r.id_pergunta = p.id
-INNER JOIN quiz q ON p.id_quiz = q.id
-INNER JOIN manhwa m ON q.id_manhwa = m.id
-WHERE u.id = 1 -- Troque pelo ID do usuário logado
-GROUP BY u.nome, m.titulo;
-
--- 3️ Lista todas as respostas de um usuário em um quiz específico, mostrando detalhes
-SELECT 
-    r.id_usuario,
-    u.nome,
-    q.titulo AS quiz,
-    m.titulo AS manhwa,
-    r.id_pergunta,
-    r.id_alternativa,
-    r.data_resposta
-FROM resposta_usuario r
-INNER JOIN usuario u ON r.id_usuario = u.id
-INNER JOIN pergunta p ON r.id_pergunta = p.id
-INNER JOIN quiz q ON p.id_quiz = q.id
-INNER JOIN manhwa m ON q.id_manhwa = m.id
-WHERE r.id_usuario = 1 AND q.id = 2 -- Troque pelo usuário e quiz atual
-ORDER BY r.data_resposta;
-
--- 4️ Conta quantos quizzes diferentes cada usuário já respondeu
-SELECT 
-    u.nome,
-    COUNT(DISTINCT q.id) AS totalQuizzesRespondidos
-FROM resposta_usuario r
-INNER JOIN usuario u ON r.id_usuario = u.id
-INNER JOIN pergunta p ON r.id_pergunta = p.id
-INNER JOIN quiz q ON p.id_quiz = q.id
-GROUP BY u.nome
-ORDER BY totalQuizzesRespondidos DESC;
 
 -- votos por manhwa
 SELECT m.titulo, COUNT(mf.id) AS total_votos
 FROM manhwa_favorito mf
 JOIN manhwa m ON mf.id_manhwa = m.id
 GROUP BY m.titulo
+ORDER BY total_votos DESC;
+
+-- votos por genero
+SELECT m.genero, COUNT(mf.id) AS total_votos
+FROM manhwa_favorito mf
+JOIN manhwa m ON mf.id_manhwa = m.id
+GROUP BY m.genero
 ORDER BY total_votos DESC;
 
 -- 5️ Mostra todos os manhwas cadastrados no sistema

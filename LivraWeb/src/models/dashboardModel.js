@@ -27,8 +27,11 @@ function buscarGeneroFav() {
 
 function buscarResultado() {
     var instrucaoSql = `
-    SELECT resultado 
-    FROM quiz;`;
+        SELECT resultado, 
+        COUNT(*) AS qtd 
+        FROM quiz 
+        GROUP BY resultado; 
+    `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

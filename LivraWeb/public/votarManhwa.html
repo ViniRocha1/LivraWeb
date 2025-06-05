@@ -18,6 +18,8 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="livros.html">Livros</a></li>
           <li><a href="dashboard.html"> Dashboard </a></li>
+          <li><a href="quiz.html"> Quiz </a></li>
+          <li> <a href="#" onclick="logout()" id="botaoLogout">Sair</a> </li>
           <li><img src="assets/icon/iconLivro.png" alt="Ícone Livro" /></li>
         </ul>
       </nav>
@@ -27,7 +29,7 @@
     <h1 class="titulo-principal">QUESTIONÁRIO <span>MANHWAS</span></h1>
 
     <section class="votacao-secao">
-      <h2>Qual é o seu <span class="destaque">Manhwa</span>        
+      <h2>Qual é o seu <span class="destaque">Manhwa</span>
         e <span class="destaque"> Gênero </span> favorito? </h2>
 
       <div class="imagem-preview">
@@ -35,24 +37,24 @@
       </div>
 
       <div class="separar">
-      <select id="manhwas" class="select-manhwa">
-        <option value="#">SELECIONE</option>
-        <option value="2">Solo Leveling</option>
-        <option value="1">The Beginning After The End (TBATE)</option>
-        <option value="3">Second Life Ranker</option>
-        <option value="4">Heavenly Demon Reborn</option>
-        <option value="5">Revenge of the Iron-Blooded Sword Hound</option>
-      </select>
-      <br>
-      <br>
-                    
-      <select id="genero" class="select-genero">
-        <option value="acao"> Ação </option>
-        <option value="fantasia"> Fantasia </option>
-        <option value="aventura"> Aventura </option>
+        <select id="manhwas" class="select-manhwa">
+          <option value="#">SELECIONE</option>
+          <option value="2">Solo Leveling</option>
+          <option value="1">The Beginning After The End (TBATE)</option>
+          <option value="3">Second Life Ranker</option>
+          <option value="4">Heavenly Demon Reborn</option>
+          <option value="5">Revenge of the Iron-Blooded Sword Hound</option>
+        </select>
+        <br>
+        <br>
 
-      </select>
-    </div>
+        <select id="genero" class="select-genero">
+          <option value="acao"> Ação </option>
+          <option value="fantasia"> Fantasia </option>
+          <option value="aventura"> Aventura </option>
+
+        </select>
+      </div>
     </section>
 
     <div class="botao-container">
@@ -102,28 +104,28 @@
         body: JSON.stringify({
           id_usuario: sessionStorage.ID_USUARIO,
           id_manhwa: selecionado,
-        })                                                                                                                  
-      })                                                                               
-      .then(res => {
-        if (!res.ok) {
-          res.text().then(texto=>{
-            console.error(texto)
-          })
-          return;
-        };
-
-        alert('Voto cadastrado com sucesso!');
-        window.location.href = "/dashboard.html";
-
-
+        })
       })
-      .catch(erro => {
-        console.error(erro);
-        alert('Erro ao cadastrar voto.');
-      });
+        .then(res => {
+          if (!res.ok) {
+            res.text().then(texto => {
+              console.error(texto)
+            })
+            return;
+          };
+
+          alert('Voto cadastrado com sucesso!');
+          window.location.href = "/dashboard.html";
+
+
+        })
+        .catch(erro => {
+          console.error(erro);
+          alert('Erro ao cadastrar voto.');
+        });
     }
 
-    function cadastrarGenero(){
+    function cadastrarGenero() {
 
       const generoSelecionado = generoSelect.value
 
@@ -131,7 +133,7 @@
         alert('Por favor, selecione um Gênero.');
         return;
       }
-      
+
       console.log(generoSelecionado)
 
       fetch(`/votacao/cadastrar`, {
@@ -139,25 +141,35 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           genero: generoSelecionado,
-        })                                                                                                                  
-      })      
-      .then(res => {
-        if (!res.ok) {
-          res.text().then(texto=>{
-            console.error(texto)
-          })
-          return;
-        };
-
-        alert('Voto cadastrado com sucesso!');
-        window.location.href = "/dashboard.html";
-
-
+        })
       })
-      .catch(erro => {
-        console.error(erro);
-        alert('Erro ao cadastrar voto.');
-      });
+        .then(res => {
+          if (!res.ok) {
+            res.text().then(texto => {
+              console.error(texto)
+            })
+            return;
+          };
+
+          alert('Voto cadastrado com sucesso!');
+          window.location.href = "/dashboard.html";
+
+
+        })
+        .catch(erro => {
+          console.error(erro);
+          alert('Erro ao cadastrar voto.');
+        });
+    }
+
+
+    function logout() {
+      // Remove os dados da sessão (ex: token, dados salvos no localStorage/sessionStorage)
+      sessionStorage.clear();
+      localStorage.clear();
+
+      // Redireciona para a tela de login ou home
+      window.location.href = "login.html";
     }
   </script>
 </body>

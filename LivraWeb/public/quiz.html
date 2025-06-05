@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="./imagens/icon/marca icon.png" />
-    <link rel="stylesheet" href="./styles/dashboard.css" />
+    <link rel="stylesheet" href="./styles/quizLivraWeb.css" />
     <title>LivraWeb</title>
     <!-- Incluindo a biblioteca Chart.js para desenhar gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -19,7 +19,8 @@
                     <li><a href="index.html"> Home </a></li>
                     <li><a href="livros.html"> livros </a></li>
                     <li><a href="votarManhwa.html"> Manhwas </a></li>
-                    <li><a href="quiz.html"> Quiz </a></li>
+                    <li><a href="dashboard.html"> Dashboard </a></li>
+                    <li> <a href="#" onclick="logout()" id="botaoLogout">Sair</a> </li>
                     <li>
                         <img src="assets/icon/iconLivro.png" alt="Ícone Livro" />
                     </li>
@@ -389,16 +390,26 @@ function finalizarJogo() {
     if (pontuacaoFinal <= 5) {
         spanPontuacaoFinal.classList.add("text-danger-final")
     } else if (pontuacaoFinal === 6 || pontuacaoFinal === 7) {
-        spanPontuacaoFinal.classList.add("text-warning-final")
-    } else if (pontuacaoFinal > 7) {
-        spanPontuacaoFinal.classList.add("text-success-final")
+        spanPontuacaoFinal.classList.add("text-warning-final");
+    } else if (pontuacaoFinal >= 8) {
+        spanPontuacaoFinal.classList.add("text-success-final");
     }
 
-    document.getElementById('jogo').classList.add("text-new-gray")
+    // Desabilita botão de envio após o fim
+    btnEnviar.disabled = true;
 
-    btnProx.disabled = true
-    btnEnviar.disabled = true
-    btnTentarNovamente.disabled = false
+    // Bloqueia alternativas
+    habilitarAlternativas(false);
+
+    // Habilita botão de tentar novamente
+    btnTentarNovamente.disabled = false;
+
+    // Marcar a div principal como finalizada
+    const jogoDiv = document.getElementById("jogo");
+    if (jogoDiv) {
+        jogoDiv.classList.add("text-new-gray");
+    }
+
 
     fetch(`/quiz/cadastrarRespostas/`, {
         method: 'POST',
@@ -414,4 +425,12 @@ function finalizarJogo() {
         return response.json()
     }).catch((erro) => { console.log(erro) })
 }
+    function logout() {
+      // Remove os dados da sessão (ex: token, dados salvos no localStorage/sessionStorage)
+      sessionStorage.clear();
+      localStorage.clear();
+
+      // Redireciona para a tela de login ou home
+      window.location.href = "login.html";
+    }
 </script>

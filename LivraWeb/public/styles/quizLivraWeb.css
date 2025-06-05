@@ -1,28 +1,16 @@
-/* quizLivraWeb.css */
 @import url('https://fonts.googleapis.com/css2?family=Karantina&family=Poppins:wght@600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#spanQuestaoExibida, 
-#labelOpcaoUm, 
-#labelOpcaoDois, 
-#labelOpcaoTres, 
-#labelOpcaoQuatro {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600; /* Negrito médio para destaque */
-    font-size: 1.1rem;
-    color: #4B367C; /* tom roxo escuro */
-}
-
-
-html, body {
-    height: 100%;
-    background: linear-gradient(to right, #1e1e2f, #2d2d3f);
-    color: #ffffff;
+body {
+  background-color: #2d2d3f;
+  color: #eee;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Sidebar fixa lateral */
@@ -30,8 +18,8 @@ header {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh; /* altura total da tela */
-  width: 220px; /* largura da sidebar */
+  height: 100vh;
+  width: 220px;
   background-color: rgba(94, 77, 178, 0.9);
   box-shadow: 2px 0 8px rgba(94, 77, 178, 0.8);
   z-index: 1000;
@@ -84,8 +72,6 @@ header {
   transition: color 0.3s ease;
 }
 
-
-
 .navbar ul li img {
   height: 60px;
   width: 60px;
@@ -93,7 +79,16 @@ header {
   display: block;
 }
 
-
+#spanQuestaoExibida, 
+#labelOpcaoUm, 
+#labelOpcaoDois, 
+#labelOpcaoTres, 
+#labelOpcaoQuatro {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #4B367C;
+}
 
 #pontuacaoEJogo {
     display: flex;
@@ -101,6 +96,7 @@ header {
     align-items: center;
     flex-direction: column;
     padding-top: 80px;
+    padding-left: 120px;
 }
 
 .botao_iniciar {
@@ -151,9 +147,8 @@ button#btnIniciarQuiz:hover {
   gap: 8px;
 }
 
-/* Estilo geral dos botões do quiz */
 #btnEnviar, #btnTentarNovamente {
-    background-color: #7a5df2; /* Roxo principal */
+    background-color: #7a5df2;
     color: #fff;
     border: none;
     padding: 12px 30px;
@@ -169,14 +164,14 @@ button#btnIniciarQuiz:hover {
 
 #btnEnviar:hover:not(:disabled),
 #btnTentarNovamente:hover:not(:disabled) {
-    background-color: #9c80ff; /* Roxo mais claro no hover */
+    background-color: #9c80ff;
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(156, 128, 255, 0.6);
 }
 
 #btnEnviar:disabled,
 #btnTentarNovamente:disabled {
-    background-color: #55597e; /* Cinza escuro para desabilitado */
+    background-color: #55597e;
     cursor: not-allowed;
     box-shadow: none;
     transform: none;
@@ -184,7 +179,7 @@ button#btnIniciarQuiz:hover {
 }
 
 #btnTentarNovamente {
-    background-color: #5e4db2; 
+    background-color: #5e4db2;
     box-shadow: 0 4px 8px rgba(94, 77, 178, 0.5);
 }
 
@@ -192,7 +187,6 @@ button#btnIniciarQuiz:hover {
     background-color: #836ccc;
     box-shadow: 0 6px 12px rgba(131, 108, 204, 0.7);
 }
-
 
 .acertos {
     color: green;
@@ -203,16 +197,31 @@ button#btnIniciarQuiz:hover {
 }
 
 .text-success-final {
-    color: #2ecc71; /* verde */
+    color: #2ecc71;
     font-weight: bold;
 }
 
 .text-warning-final {
-    color: #f39c12; /* amarelo */
+    color: #f39c12;
     font-weight: bold;
 }
 
 .text-danger-final {
-    color: #e74c3c; /* vermelho */
+    color: #e74c3c;
     font-weight: bold;
+}
+
+.text-success-with-bg {
+  background-color: #4caf50;
+  color: white;
+}
+
+.text-danger-with-bg {
+  background-color: #f44336;
+  color: white;
+}
+
+.text-warning-with-bg {
+  background-color: #ff9800;
+  color: white;
 }
