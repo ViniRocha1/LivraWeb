@@ -116,8 +116,8 @@
                     datasets: [{
                         label: 'Votos',
                         data: valores,
-                        backgroundColor: 'rgba(210, 18, 22, 0.2)',
-                        borderColor: 'rgba(210, 18, 22, 1)',
+                        backgroundColor: 'rgba(400, 400, 22, 0.2)',
+                        borderColor: 'black',
                         borderWidth: 1
                     }]
                 }
@@ -142,8 +142,8 @@
                     datasets: [{
                         label: 'Votos',
                         data: valores,
-                        backgroundColor: 'rgba(210, 18, 22, 0.2)',
-                        borderColor: 'rgba(210, 18, 22, 1)',
+                        backgroundColor: 'rgba(11, 18, 22, 0.2)',
+                        borderColor: 'black',
                         borderWidth: 1
                     }]
                 }
@@ -163,14 +163,14 @@
 
             const ctx = document.getElementById('graficoResultado').getContext('2d');
             new Chart(ctx, {
-                type: 'bar',
+                type: 'pie',
                 data: {
                     labels: labels,
                     datasets: [{
                         label: 'Resultados do Quiz',
                         data: valores,
-                        backgroundColor: 'rgba(210, 18, 22, 0.2)',
-                        borderColor: 'rgba(210, 18, 22, 1)',
+                        backgroundColor: 'rgba(99, 400, 11, 0.2)',
+                        borderColor: 'black',
                         borderWidth: 1
                     }]
                 }
