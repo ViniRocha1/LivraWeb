@@ -52,63 +52,55 @@
   </div>
 
   <script>
-        function cadastrar() {
-      // aguardar();
-  
-      //Recupere o valor da nova input pelo nome do id
-      // Agora vá para o método fetch logo abaixo
+    function cadastrar() {
       var nomeVar = nome_input.value;
       var emailVar = email_input.value;
       var senhaVar = senha_input.value;
       var confirmarSenha = confirmacao_senha_input.value
-  
-      // Verificando se há algum campo em branco
-      if(
+
+      if (
         confirmarSenha != senhaVar
-      ){
+      ) {
         alert("As senhas não coincidem")
         return
-      } else{
+      } else {
         if (
-        nomeVar == "" ||
-        emailVar == "" ||
-        senhaVar == "" 
-      ) {
-        finalizarAguardar();
-        return false;
-      } 
-      // Enviando o valor da nova input
-      fetch("/usuarios/cadastrar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          // crie um atributo que recebe o valor recuperado aqui
-          // Agora vá para o arquivo routes/usuario.js
-          nomeServer: nomeVar,
-          emailServer: emailVar,
-          senhaServer: senhaVar
-        }),
-      })
-        .then(function (resposta) {
-          console.log("resposta: ", resposta);
-  
-          if (resposta.ok) {
-            setTimeout(() => {
-              window.location = "login.html";
-            }, "2000");
-  
-            limparFormulario();
-            finalizarAguardar();
-          } else {
-            throw "Houve um erro ao tentar realizar o cadastro!";
-          }
+          nomeVar == "" ||
+          emailVar == "" ||
+          senhaVar == ""
+        ) {
+          finalizarAguardar();
+          return false;
+        }
+        fetch("/usuarios/cadastrar", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nomeServer: nomeVar,
+            emailServer: emailVar,
+            senhaServer: senhaVar
+          }),
         })
-    }
-    
+          .then(function (resposta) {
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+              setTimeout(() => {
+                window.location = "login.html";
+              }, "2000");
+
+              limparFormulario();
+              finalizarAguardar();
+            } else {
+              throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+          })
       }
-      
+
+    }
+
   </script>
 </body>
 

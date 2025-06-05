@@ -8,7 +8,6 @@
 
 </head>
 <body>
-  <!-- Navbar (mesma estrutura) -->
   <div class="navbar">
     <a href="index.html"><img src="assets/icon/iconLivro.png" alt="Logo LivraWeb" class="icon"></a>
     <div class="navbarLinks">
@@ -30,7 +29,7 @@
     </div>
 
     <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="Pesquisar por título, autor ou gênero..." onkeyup="filterBooks()" />
+      <input type="text" id="searchInput" placeholder="Pesquisar por título, autor ou gênero..." onkeyup="filtrarLivro()" />
     </div>
 
     <div class="books-grid" id="bookList">
@@ -58,10 +57,10 @@
         <p>Autor: Hajun Im<br>Gênero: Ação</p>
       </div>
 
-      <div class="book-card" data-titulo="Revenge Iron-Blooded Sword Hound" data-autor="Unknown" data-genero="Fantasia">
+      <div class="book-card" data-titulo="Revenge Iron-Blooded Sword Hound" data-autor="Regobal Basso" data-genero="Fantasia">
         <img src="assets/img/revengeIronBloodedSwordHound.webp" alt="Revenge Iron-Blooded Sword Hound"/>
         <h3>Revenge Iron-Blooded Sword Hound</h3>
-        <p>Autor: Unknown<br>Gênero: Fantasia</p>
+        <p>Autor: Regobal Basso<br>Gênero: Fantasia</p>
       </div>
     </div>
   </div>
@@ -85,7 +84,7 @@
     </footer>
 
   <script>
-    function filterBooks() {
+    function filtrarLivro() {
       const input = document.getElementById('searchInput').value.toLowerCase();
       const cards = document.querySelectorAll('.book-card');
 

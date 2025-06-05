@@ -7,7 +7,6 @@
     <link rel="icon" href="./imagens/icon/marca icon.png" />
     <link rel="stylesheet" href="./styles/quizLivraWeb.css" />
     <title>LivraWeb</title>
-    <!-- Incluindo a biblioteca Chart.js para desenhar gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -31,16 +30,16 @@
 
     <div id="titulo" class="titulo"></div>
     <div class="content">
-    
-    <div id="pontuacaoEJogo">
-        <div class="botao_iniciar">
-            <div class="titulo-principal">
-                <h1>Quiz - <span> LivraWeb </span></h1>
+
+        <div id="pontuacaoEJogo">
+            <div class="botao_iniciar">
+                <div class="titulo-principal">
+                    <h1>Quiz - <span> LivraWeb </span></h1>
+                </div>
+                <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
             </div>
-            <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
         </div>
     </div>
-</div>
 </body>
 
 </html>
@@ -48,108 +47,106 @@
 <script>
     let idUsuario = sessionStorage.ID_USUARIO
 
-const listaDeQuestoes = [
+    const listaDeQuestoes = [
 
-    // SOLO LEVELING
-    {
-        pergunta: "Qual o nome do protagonista de Solo Leveling?",
-        alternativaA: "Go Gun-Hee",
-        alternativaB: "Sung Jin-Woo",
-        alternativaC: "Igris",
-        alternativaD: "Choi Jong-In",
-        alternativaCorreta: "alternativaB"
-    },
-    {
-        pergunta: "Que tipo de classe Sung Jin-Woo recebe após sua reencarnação como jogador?",
-        alternativaA: "Mago Sombrio",
-        alternativaB: "Caçador de Batalha",
-        alternativaC: "Monarca das Sombras",
-        alternativaD: "Espadachim Real",
-        alternativaCorreta: "alternativaC"
-    },
+        // SOLO LEVELING
+        {
+            pergunta: "Qual o nome do protagonista de Solo Leveling?",
+            alternativaA: "Go Gun-Hee",
+            alternativaB: "Sung Jin-Woo",
+            alternativaC: "Igris",
+            alternativaD: "Choi Jong-In",
+            alternativaCorreta: "alternativaB"
+        },
+        {
+            pergunta: "Que tipo de classe Sung Jin-Woo recebe após sua reencarnação como jogador?",
+            alternativaA: "Mago Sombrio",
+            alternativaB: "Caçador de Batalha",
+            alternativaC: "Monarca das Sombras",
+            alternativaD: "Espadachim Real",
+            alternativaCorreta: "alternativaC"
+        },
 
-    // TBATE
-    {
-        pergunta: "Quem é o protagonista de The Beginning After The End?",
-        alternativaA: "Arthur Leywin",
-        alternativaB: "Lucas Wykes",
-        alternativaC: "Rey Greyrat",
-        alternativaD: "Sylvie",
-        alternativaCorreta: "alternativaA"
-    },
-    {
-        pergunta: "Qual o nome da companheira dracônica de Arthur?",
-        alternativaA: "Silvie",
-        alternativaB: "Sylvie",
-        alternativaC: "Saphira",
-        alternativaD: "Sierra",
-        alternativaCorreta: "alternativaB"
-    },
+        // TBATE
+        {
+            pergunta: "Quem é o protagonista de The Beginning After The End?",
+            alternativaA: "Arthur Leywin",
+            alternativaB: "Lucas Wykes",
+            alternativaC: "Rey Greyrat",
+            alternativaD: "Sylvie",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            pergunta: "Qual o nome da companheira dracônica de Arthur?",
+            alternativaA: "Silvie",
+            alternativaB: "Sylvie",
+            alternativaC: "Saphira",
+            alternativaD: "Sierra",
+            alternativaCorreta: "alternativaB"
+        },
 
-    // SECOND LIFE RANKER
-    {
-        pergunta: "Qual é o nome do protagonista de Second Life Ranker?",
-        alternativaA: "Yeon-woo",
-        alternativaB: "Baam",
-        alternativaC: "Jin-Woo",
-        alternativaD: "Han Soo",
-        alternativaCorreta: "alternativaA"
-    },
-    {
-        pergunta: "Qual o objetivo de Yeon-woo ao entrar na Torre?",
-        alternativaA: "Ganhar poder",
-        alternativaB: "Vingar seu irmão",
-        alternativaC: "Dominar os andares",
-        alternativaD: "Fugir de seu passado",
-        alternativaCorreta: "alternativaB"
-    },
+        // SECOND LIFE RANKER
+        {
+            pergunta: "Qual é o nome do protagonista de Second Life Ranker?",
+            alternativaA: "Yeon-woo",
+            alternativaB: "Baam",
+            alternativaC: "Jin-Woo",
+            alternativaD: "Han Soo",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            pergunta: "Qual o objetivo de Yeon-woo ao entrar na Torre?",
+            alternativaA: "Ganhar poder",
+            alternativaB: "Vingar seu irmão",
+            alternativaC: "Dominar os andares",
+            alternativaD: "Fugir de seu passado",
+            alternativaCorreta: "alternativaB"
+        },
 
-    // HEAVENLY DEMON REBORN!
-    {
-        pergunta: "Quem é o protagonista de Heavenly Demon Reborn?",
-        alternativaA: "Chun Ma",
-        alternativaB: "Yoo Won",
-        alternativaC: "Hyuk Woon Seong",
-        alternativaD: "Baek Chun",
-        alternativaCorreta: "alternativaC"
-    },
-    {
-        pergunta: "Qual seita trai o protagonista no início da história?",
-        alternativaA: "Seita do Céu Celestial",
-        alternativaB: "Igreja do Deus da Guerra",
-        alternativaC: "Seita do Demônio Celestial",
-        alternativaD: "Pavilhão do Dragão Carmesim",
-        alternativaCorreta: "alternativaA"
-    },
+        // HEAVENLY DEMON REBORN!
+        {
+            pergunta: "Quem é o protagonista de Heavenly Demon Reborn?",
+            alternativaA: "Chun Ma",
+            alternativaB: "Yoo Won",
+            alternativaC: "Hyuk Woon Seong",
+            alternativaD: "Baek Chun",
+            alternativaCorreta: "alternativaC"
+        },
+        {
+            pergunta: "Qual seita trai o protagonista no início da história?",
+            alternativaA: "Seita do Céu Celestial",
+            alternativaB: "Igreja do Deus da Guerra",
+            alternativaC: "Seita do Demônio Celestial",
+            alternativaD: "Pavilhão do Dragão Carmesim",
+            alternativaCorreta: "alternativaA"
+        },
 
-    // REVENGE OF THE IRON-BLOODED SWORD HOUND
-    {
-        pergunta: "Qual o nome do protagonista de Revenge of the Iron-Blooded Sword Hound?",
-        alternativaA: "Vikir Van Baskerville",
-        alternativaB: "Aran Baskerville",
-        alternativaC: "Cain Pendragon",
-        alternativaD: "Julius",
-        alternativaCorreta: "alternativaA"
-    },
-    {
-        pergunta: "O que motiva o protagonista a buscar vingança?",
-        alternativaA: "A morte de sua esposa",
-        alternativaB: "A destruição de seu clã",
-        alternativaC: "A humilhação e execução injusta",
-        alternativaD: "O roubo de sua herança",
-        alternativaCorreta: "alternativaC"
-    }
+        // REVENGE OF THE IRON-BLOODED SWORD HOUND
+        {
+            pergunta: "Qual o nome do protagonista de Revenge of the Iron-Blooded Sword Hound?",
+            alternativaA: "Vikir Van Baskerville",
+            alternativaB: "Aran Baskerville",
+            alternativaC: "Cain Pendragon",
+            alternativaD: "Julius",
+            alternativaCorreta: "alternativaA"
+        },
+        {
+            pergunta: "O que motiva o protagonista a buscar vingança?",
+            alternativaA: "A morte de sua esposa",
+            alternativaB: "A destruição de seu clã",
+            alternativaC: "A humilhação e execução injusta",
+            alternativaD: "O roubo de sua herança",
+            alternativaCorreta: "alternativaC"
+        }
 
-]
+    ]
 
-    // variáveis globais    
     let numeroDaQuestaoAtual = 0
     let pontuacaoFinal = 0
     let tentativaIncorreta = 0
     let certas = 0
     let erradas = 0
     let quantidadeDeQuestoes = listaDeQuestoes.length
-    // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
 
 
     function iniciarQuiz() {
@@ -225,7 +222,6 @@ const listaDeQuestoes = [
         preencherHTMLcomQuestaoAtual(0)
 
         btnEnviar.disabled = false
-        // btnConcluir.disabled = true
         btnTentarNovamente.disabled = false
     }
 
@@ -235,7 +231,7 @@ const listaDeQuestoes = [
         numeroDaQuestaoAtual = index
         console.log("questaoAtual")
         console.log(questaoAtual)
-        document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
+        document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1
         document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
         document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
         document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
@@ -243,38 +239,38 @@ const listaDeQuestoes = [
         document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
     }
 
-function Enviar() {
-    const options = document.getElementsByName("option");
+    function Enviar() {
+        const options = document.getElementsByName("option");
 
-    let hasChecked = false;
-    for (let i = 0; i < options.length; i++) {
-        if (options[i].checked) {
-            hasChecked = true;
-            break;
+        let hasChecked = false;
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].checked) {
+                hasChecked = true;
+                break;
+            }
         }
-    }
 
-    if (!hasChecked) {
-        alert("Não há alternativas escolhidas. Escolha uma opção.");
-        return;
-    }
-
-    btnEnviar.disabled = true;
-    habilitarAlternativas(false);
-    checarResposta();
-
-    setTimeout(() => {
-        desmarcarRadioButtons();
-        limparCoresBackgroundOpcoes();
-
-        if (numeroDaQuestaoAtual < quantidadeDeQuestoes) {
-            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
-            btnEnviar.disabled = false;
-        } else {
-            finalizarJogo();
+        if (!hasChecked) {
+            alert("Não há alternativas escolhidas. Escolha uma opção.");
+            return;
         }
-    }, 1200); // espera 1,2s para mostrar se acertou/errou antes de mudar a pergunta
-}
+
+        btnEnviar.disabled = true;
+        habilitarAlternativas(false);
+        checarResposta();
+
+        setTimeout(() => {
+            desmarcarRadioButtons();
+            limparCoresBackgroundOpcoes();
+
+            if (numeroDaQuestaoAtual < quantidadeDeQuestoes) {
+                preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual);
+                btnEnviar.disabled = false;
+            } else {
+                finalizarJogo();
+            }
+        }, 1200);
+    }
 
     function habilitarAlternativas(trueOrFalse) {
         let opcaoEscolhida = trueOrFalse ? false : true
@@ -286,35 +282,35 @@ function Enviar() {
 
     }
 
-function tentarNovamente() {
-    // Resetar variáveis
-    numeroDaQuestaoAtual = 0;
-    pontuacaoFinal = 0;
-    tentativaIncorreta = 0;
-    certas = 0;
-    erradas = 0;
+    function tentarNovamente() {
 
-    // Resetar visual
-    const msgFinal = document.getElementById('msgFinal');
-    msgFinal.innerHTML = '';
-    msgFinal.classList.remove("text-danger-with-bg", "text-warning-with-bg", "text-success-with-bg");
+        numeroDaQuestaoAtual = 0;
+        pontuacaoFinal = 0;
+        tentativaIncorreta = 0;
+        certas = 0;
+        erradas = 0;
 
-    const jogoDiv = document.getElementById('jogo');
-    if (jogoDiv) {
-        jogoDiv.classList.remove("text-new-gray");
+
+        const msgFinal = document.getElementById('msgFinal');
+        msgFinal.innerHTML = '';
+        msgFinal.classList.remove("text-danger-with-bg", "text-warning-with-bg", "text-success-with-bg");
+
+        const jogoDiv = document.getElementById('jogo');
+        if (jogoDiv) {
+            jogoDiv.classList.remove("text-new-gray");
+        }
+
+
+        iniciarQuiz();
     }
 
-    // Recriar o quiz
-    iniciarQuiz();
-}
-
     function checarResposta() {
-        const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
-        const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
+        const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual]
+        const respostaQuestaoAtual = questaoAtual.alternativaCorreta
 
-        const options = document.getElementsByName("option"); // recupera alternativas no html
+        const options = document.getElementsByName("option");
 
-        let alternativaCorreta = null // variável para armazenar a alternativa correta
+        let alternativaCorreta = null
 
         options.forEach((option) => {
             if (option.value === respostaQuestaoAtual) {
@@ -323,7 +319,6 @@ function tentarNovamente() {
             }
         })
 
-        // verifica se resposta assinalada é correta
         options.forEach((option) => {
             if (option.checked === true && option.value === respostaQuestaoAtual) {
                 document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
@@ -358,79 +353,72 @@ function tentarNovamente() {
             options[i].checked = false;
         }
     }
-function finalizarJogo() {
-    let textoParaMensagemFinal = null
-    let classComCoresParaMensagemFinal = null
-    const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes * 100
+    function finalizarJogo() {
+        let textoParaMensagemFinal = null
+        let classComCoresParaMensagemFinal = null
+        const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes * 100
 
-    // Define cor e texto da mensagem final (mantém sua lógica)
-    if (porcentagemFinalDeAcertos <= 30) {
-        textoParaMensagemFinal = "Parece que você não estudou..."
-        classComCoresParaMensagemFinal = "text-danger-with-bg"
-    }
-    else if (porcentagemFinalDeAcertos > 30 && porcentagemFinalDeAcertos < 80) {
-        textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
-        classComCoresParaMensagemFinal = "text-warning-with-bg"
-    }
-    else if (porcentagemFinalDeAcertos >= 80) {
-        textoParaMensagemFinal = "Uau, parabéns!"
-        classComCoresParaMensagemFinal = "text-success-with-bg"
-    }
+        if (porcentagemFinalDeAcertos <= 30) {
+            textoParaMensagemFinal = "Parece que você não estudou..."
+            classComCoresParaMensagemFinal = "text-danger-with-bg"
+        }
+        else if (porcentagemFinalDeAcertos > 30 && porcentagemFinalDeAcertos < 80) {
+            textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
+            classComCoresParaMensagemFinal = "text-warning-with-bg"
+        }
+        else if (porcentagemFinalDeAcertos >= 80) {
+            textoParaMensagemFinal = "Uau, parabéns!"
+            classComCoresParaMensagemFinal = "text-success-with-bg"
+        }
 
-    textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)) + "% das questões."
+        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)) + "% das questões."
 
-    document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
-    document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
-    document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
+        document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
+        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
+        document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
 
-    // Agora define a cor da pontuação final com base na quantidade de acertos (pontuacaoFinal)
-    const spanPontuacaoFinal = document.getElementById('spanPontuacaoFinal')
-    spanPontuacaoFinal.classList.remove("text-danger-final", "text-warning-final", "text-success-final")
+        const spanPontuacaoFinal = document.getElementById('spanPontuacaoFinal')
+        spanPontuacaoFinal.classList.remove("text-danger-final", "text-warning-final", "text-success-final")
 
-    if (pontuacaoFinal <= 5) {
-        spanPontuacaoFinal.classList.add("text-danger-final")
-    } else if (pontuacaoFinal === 6 || pontuacaoFinal === 7) {
-        spanPontuacaoFinal.classList.add("text-warning-final");
-    } else if (pontuacaoFinal >= 8) {
-        spanPontuacaoFinal.classList.add("text-success-final");
-    }
+        if (pontuacaoFinal <= 5) {
+            spanPontuacaoFinal.classList.add("text-danger-final")
+        } else if (pontuacaoFinal === 6 || pontuacaoFinal === 7) {
+            spanPontuacaoFinal.classList.add("text-warning-final");
+        } else if (pontuacaoFinal >= 8) {
+            spanPontuacaoFinal.classList.add("text-success-final");
+        }
 
-    // Desabilita botão de envio após o fim
-    btnEnviar.disabled = true;
+        btnEnviar.disabled = true;
 
-    // Bloqueia alternativas
-    habilitarAlternativas(false);
+        habilitarAlternativas(false);
 
-    // Habilita botão de tentar novamente
-    btnTentarNovamente.disabled = false;
+        btnTentarNovamente.disabled = false;
 
-    // Marcar a div principal como finalizada
-    const jogoDiv = document.getElementById("jogo");
-    if (jogoDiv) {
-        jogoDiv.classList.add("text-new-gray");
-    }
+        const jogoDiv = document.getElementById("jogo");
+        if (jogoDiv) {
+            jogoDiv.classList.add("text-new-gray");
+        }
 
 
-    fetch(`/quiz/cadastrarRespostas/`, {
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({
-            id_usuarioServer: sessionStorage.ID_USUARIO,
-            resultadoServer: porcentagemFinalDeAcertos
+        fetch(`/quiz/cadastrarRespostas/`, {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id_usuarioServer: sessionStorage.ID_USUARIO,
+                resultadoServer: porcentagemFinalDeAcertos
+            })
         })
-    })
-    .then((response) => {
-        if (!response.ok) { throw new Error('Ocorreu um erro ao cadastrar as respostas' + response.status) }
-        if (response.status === 204) { return {} }
-        return response.json()
-    }).catch((erro) => { console.log(erro) })
-}
+            .then((response) => {
+                if (!response.ok) { throw new Error('Ocorreu um erro ao cadastrar as respostas' + response.status) }
+                if (response.status === 204) { return {} }
+                return response.json()
+            }).catch((erro) => { console.log(erro) })
+    }
     function logout() {
-      // Remove os dados da sessão (ex: token, dados salvos no localStorage/sessionStorage)
-      sessionStorage.clear();
-      localStorage.clear();
 
-      // Redireciona para a tela de login ou home
-      window.location.href = "login.html";
+        sessionStorage.clear();
+        localStorage.clear();
+
+        window.location.href = "login.html";
     }
 </script>

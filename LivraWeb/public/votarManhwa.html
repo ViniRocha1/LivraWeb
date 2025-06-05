@@ -164,11 +164,9 @@
 
 
     function logout() {
-      // Remove os dados da sessão (ex: token, dados salvos no localStorage/sessionStorage)
       sessionStorage.clear();
       localStorage.clear();
 
-      // Redireciona para a tela de login ou home
       window.location.href = "login.html";
     }
   </script>

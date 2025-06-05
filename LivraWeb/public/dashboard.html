@@ -7,7 +7,6 @@
     <link rel="icon" href="./imagens/icon/marca icon.png" />
     <link rel="stylesheet" href="./styles/dashboard.css" />
     <title>LivraWeb</title>
-    <!-- Incluindo a biblioteca Chart.js para desenhar gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -53,7 +52,6 @@
             fetch(`/dashboard/buscarManhwaFav`, { cache: 'no-store' }).then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
-                        //console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                         resposta.reverse();
                         graficoManhwa(resposta);
                     });
@@ -190,11 +188,9 @@
         };
 
         function logout() {
-            // Remove os dados da sessão (ex: token, dados salvos no localStorage/sessionStorage)
             sessionStorage.clear();
             localStorage.clear();
 
-            // Redireciona para a tela de login ou home
             window.location.href = "login.html";
         }
 
